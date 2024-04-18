@@ -1,0 +1,44 @@
+<!-- @format -->
+
+<!DOCTYPE html>
+<html lang="en">
+	<head>
+		<meta charset="utf-8" />
+		<link rel="icon" href="https://cdn-icons-png.flaticon.com/512/5606/5606108.png" />
+		<meta name="viewport" content="width=device-width, initial-scale=1" />
+		<meta name="theme-color" content="#000000" />
+		<meta name="description" content="Web site created using create-react-app" />
+		<link
+			rel="apple-touch-icon"
+			href="https://images.rawpixel.com/image_png_200/cHJpdmF0ZS9sci9pbWFnZXMvd2Vic2l0ZS8yMDIyLTA1L3JtNTM1LWJvb2stMDdhLnBuZw.png"
+		/>
+		<link rel="manifest" href="%PUBLIC_URL%/manifest.json" />
+		<link rel="stylesheet" href="style.css" />
+		<title>Read Journey</title>
+
+		<script type="text/javascript">
+			(function (l) {
+				if (l.search[1] === '/') {
+					var decoded = l.search
+						.slice(1)
+						.split('&')
+						.map(function (s) {
+							return s.replace(/~and~/g, '&');
+						})
+						.join('?');
+					window.history.replaceState(
+						null,
+						null,
+						l.pathname.slice(0, -1) + decoded + l.hash
+					);
+				}
+			})(window.location);
+		</script>
+	</head>
+	<body>
+		<noscript>You need to enable JavaScript to run this app.</noscript>
+		<div id="root"></div>
+		<div id="modal-root"></div>
+		<div id="loader-root"></div>
+	</body>
+</html>
