@@ -48,7 +48,6 @@ function RecommendedPage() {
 									/>
 								</label>
 							</div>
-
 							<button
 								className={styles.button_action}
 								type='submit'
@@ -59,15 +58,42 @@ function RecommendedPage() {
 						</Form>
 					)}
 				</Formik>
-				<div>
-					<p>Start your workout</p>
-					<ul>
-						<li></li>
-						<li></li>
+				<div className={styles.library_block}>
+					<p className={styles.library_title}>Start your workout</p>
+					<ul className={styles.list_container}>
+						<li className={styles.list_container_item}>
+							<div className={styles.num_item}>1</div>
+							<p className={styles.text_item}>
+								<span className={styles.text_item_ext}>
+									Create a personal library:
+								</span>
+								<span>
+									{' '}
+									add the books you intend to read <br />
+									to it.
+								</span>
+							</p>
+						</li>
+						<li className={styles.list_container_item}>
+							<div className={styles.num_item}>2</div>
+							<p className={styles.text_item}>
+								<span className={styles.text_item_ext}>
+									Create your first workout:
+								</span>
+								<span> define a goal, choose a period, start training.</span>
+							</p>
+						</li>
 					</ul>
-					<Link to={'/login'} className={styles.link_to_other_action}>
-						Already have an account?
-					</Link>
+					<ul className={styles.link_container}>
+						<li>
+							<Link to={'/library'} className={styles.link_to}>
+								My library
+							</Link>
+						</li>
+						<li className={styles.container_icon_link}>
+							<Icon name={'library'} className={styles.icon_link} />
+						</li>
+					</ul>
 				</div>
 			</Dashboard>
 			<li className={styles.recomm_book}>

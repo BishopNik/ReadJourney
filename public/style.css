@@ -35,10 +35,5 @@ ul {
 :root {
 	font-family: Gilroy;
 	background-color: rgb(20, 20, 20);
-	padding: 20px;
-}
-
-#root {
-	width: 100vw;
-	height: 100vh;
+	padding: 20px 20px 40px 20px;
 }
