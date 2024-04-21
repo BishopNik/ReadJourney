@@ -29,10 +29,10 @@ const IconClose = styled(Icon)`
 	stroke: black;
 	transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
 	&:hover {
-		stroke: ${props => props.theme.sidebar.hoverLogout};
+		stroke: black;
 	}
 	&:focus {
-		stroke: ${props => props.theme.sidebar.hoverLogout};
+		stroke: orange;
 	}
 `;
 

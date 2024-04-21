@@ -1,11 +1,12 @@
 /** @format */
 
 import { createSlice } from '@reduxjs/toolkit';
-import { register, logIn, logOut, refreshUser, changeUserInfo, changeTheme } from './operations';
+import { register, logIn, logOut, refreshUser } from './operations';
 
 const initialState = {
-	user: { name: null, email: null, avatarURL: null, thema: null },
+	user: { name: null, email: null },
 	token: null,
+	refreshToken: null,
 	isLoggedIn: false,
 	isRefreshing: false,
 	isLoading: false,
@@ -14,11 +15,7 @@ const initialState = {
 const authSlice = createSlice({
 	name: 'auth',
 	initialState,
-	reducers: {
-		addToken: (state, { payload }) => {
-			state.token = payload;
-		},
-	},
+	reducers: {},
 	extraReducers: builder => {
 		builder
 			.addCase(register.pending, state => {
@@ -29,8 +26,9 @@ const authSlice = createSlice({
 					state.isLoading = false;
 					return;
 				}
-				state.user = payload.user;
+				state.user = { name: payload.name, email: payload.email };
 				state.token = payload.token;
+				state.refreshToken = payload.refreshToken;
 				state.isLoggedIn = true;
 				state.isLoading = false;
 			})
@@ -41,8 +39,9 @@ const authSlice = createSlice({
 				state.isLoading = true;
 			})
 			.addCase(logIn.fulfilled, (state, { payload }) => {
-				state.user = payload.user;
+				state.user = { name: payload.name, email: payload.email };
 				state.token = payload.token;
+				state.refreshToken = payload.refreshToken;
 				state.isLoggedIn = true;
 				state.isLoading = false;
 			})
@@ -55,6 +54,7 @@ const authSlice = createSlice({
 			.addCase(logOut.fulfilled, state => {
 				state.user = { name: null, email: null };
 				state.token = null;
+				state.refreshToken = null;
 				state.isLoggedIn = false;
 			})
 			.addCase(logOut.rejected, state => {
@@ -64,38 +64,17 @@ const authSlice = createSlice({
 				state.isRefreshing = true;
 			})
 			.addCase(refreshUser.fulfilled, (state, { payload }) => {
-				state.user = payload;
+				state.user = { name: payload.name, email: payload.email };
+				state.token = payload.token;
+				state.refreshToken = payload.refreshToken;
 				state.isLoggedIn = true;
 				state.isRefreshing = false;
 			})
 			.addCase(refreshUser.rejected, state => {
 				state.isRefreshing = false;
 				state.isLoggedIn = false;
-			})
-			.addCase(changeUserInfo.pending, state => {
-				state.isLoading = true;
-			})
-			.addCase(changeUserInfo.fulfilled, (state, { payload }) => {
-				state.user = payload.user;
-				if (payload.token) state.token = payload.token;
-				state.isLoading = false;
-			})
-			.addCase(changeUserInfo.rejected, state => {
-				state.isLoading = false;
-			})
-			.addCase(changeTheme.pending, state => {
-				state.isLoading = true;
-			})
-			.addCase(changeTheme.fulfilled, (state, { payload }) => {
-				state.user.thema = payload.user.thema;
-				state.isLoading = false;
-			})
-			.addCase(changeTheme.rejected, state => {
-				state.isLoading = false;
 			});
 	},
 });
-
-export const { addToken } = authSlice.actions;
 
 export const authReducer = authSlice.reducer;

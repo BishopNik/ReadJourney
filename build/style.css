@@ -1,0 +1,27 @@
+/** @format */
+
+@font-face {
+	font-family: 'Gilroy Medium';
+	src: url('../src/fonts/Gilroy-Medium.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'Gilroy Bold';
+	src: url('../src/fonts/Gilroy-Bold.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+@font-face {
+	font-family: 'San Francisco Pro Text Semibold';
+	src: url('../src/fonts/FontsFree-Net-SFProText-Semibold.ttf') format('truetype');
+	font-weight: normal;
+	font-style: normal;
+}
+
+#root {
+	width: 100vw;
+	height: 100vh;
+}

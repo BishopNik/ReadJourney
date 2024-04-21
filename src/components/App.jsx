@@ -6,25 +6,23 @@ import { refreshUser } from 'redux/auth/operations';
 import { Routes, Route } from 'react-router-dom';
 import { useAuth } from 'hooks';
 import { RestrictedRoute } from 'components/RestrictedRoute';
+import { PrivateRoute } from 'components/PrivateRoute';
 import SharedLayout from './SharedLayout';
 import Loader from 'components/Loader';
-import { PrivateRoute } from 'components/PrivateRoute';
 
-const RegistrationPage = lazy(() => import('pages/RegistrationPage'));
-const LoginPage = lazy(() => import('pages/LoginPage'));
+const AuthPage = lazy(() => import('pages/AuthPage'));
 const ReadingPage = lazy(() => import('pages/ReadingPage'));
 const LibraryPage = lazy(() => import('pages/LibraryPage'));
 const RecommendedPage = lazy(() => import('pages/RecommendedPage'));
 const UnknownPage = lazy(() => import('pages/UnknownPage'));
 
 function App() {
-	// const dispatch = useDispatch();
-	// const { isRefreshing } = useAuth();
-	const isRefreshing = false;
+	const dispatch = useDispatch();
+	const { isRefreshing } = useAuth();
 
-	// useEffect(() => {
-	// 	dispatch(refreshUser());
-	// }, [dispatch]);
+	useEffect(() => {
+		dispatch(refreshUser());
+	}, [dispatch]);
 
 	return isRefreshing ? (
 		<Loader />
@@ -33,16 +31,11 @@ function App() {
 			<Route path='/' element={<SharedLayout />}>
 				<Route
 					index
-					element={
-						<RestrictedRoute
-							component={<RegistrationPage />}
-							redirectTo='/recomended'
-						/>
-					}
+					element={<RestrictedRoute component={<AuthPage />} redirectTo='/recomended' />}
 				/>
 				<Route
 					path='/login'
-					element={<RestrictedRoute component={<LoginPage />} redirectTo='/recomended' />}
+					element={<RestrictedRoute component={<AuthPage />} redirectTo='/recomended' />}
 				/>
 				<Route
 					path='/recomended'

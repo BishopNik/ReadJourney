@@ -1,0 +1,1 @@
+{"version":3,"file":"static/js/12.b3392c0c.chunk.js","mappings":"wJAQA,QAJA,WACC,OAAOA,EAAAA,EAAAA,KAAA,OAAAC,SAAK,eACb,C","sources":["pages/ReadingPage.jsx"],"sourcesContent":["/** @format */\n\nimport React from 'react';\n\nfunction ReadingPage() {\n\treturn <div>ReadingPage</div>;\n}\n\nexport default ReadingPage;\n"],"names":["_jsx","children"],"sourceRoot":""}

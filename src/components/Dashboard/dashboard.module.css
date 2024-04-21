@@ -1,0 +1,9 @@
+/** @format */
+
+.dashboard {
+	height: 478px;
+	border-radius: 30px;
+	background-color: rgb(31, 31, 31);
+	margin-bottom: 10px;
+	padding: 20px;
+}

@@ -1,0 +1,39 @@
+/** @format */
+
+.icon_logo {
+	width: 42px;
+	height: 17px;
+	margin-right: 180px;
+}
+
+.user_logo {
+	display: flex;
+	align-items: center;
+	justify-content: center;
+	margin-right: 10px;
+	width: 35px;
+	height: 35px;
+	border: 1px solid rgba(249, 249, 249, 0.2);
+	border-radius: 50%;
+	background: rgb(38, 38, 38);
+
+	color: rgb(249, 249, 249);
+	font-family: Gilroy;
+	font-size: 16px;
+	font-weight: 700;
+	line-height: 16px;
+	letter-spacing: -0.32px;
+	text-align: center;
+}
+
+.burger_button {
+	border: none;
+	background-color: transparent;
+	padding: 0;
+	cursor: pointer;
+}
+
+.icon_menu {
+	width: 28px;
+	height: 28px;
+}

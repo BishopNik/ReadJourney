@@ -1,0 +1,33 @@
+/** @format */
+
+.main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 10px;
+	min-width: 375px;
+	margin-left: auto;
+	margin-right: auto;
+}
+
+.form {
+	width: 335px;
+	height: 411px;
+	padding: 20px 20px 40px 20px;
+	border-radius: 30px;
+	background-color: rgb(31, 31, 31);
+}
+
+.iphone {
+	width: 335px;
+	height: 351px;
+	padding: 20px 40px 0 40px;
+	border-radius: 30px;
+	background-color: rgb(31, 31, 31);
+	overflow: hidden;
+}
+
+.iphone_img {
+	width: 100%;
+}

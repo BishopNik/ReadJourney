@@ -7,7 +7,6 @@ import { PersistGate } from 'redux-persist/integration/react';
 import { BrowserRouter } from 'react-router-dom';
 import App from 'components/App';
 import { Context } from 'helpers';
-import { GlobalStyle } from 'helpers/GlobalStyle';
 import { store, persistor } from './redux/store';
 import 'modern-normalize';
 import { Toaster } from 'react-hot-toast';
@@ -31,7 +30,6 @@ ReactDOM.createRoot(document.getElementById('root')).render(
 								},
 							}}
 						/>
-						<GlobalStyle />
 					</Context>
 				</BrowserRouter>
 			</PersistGate>
