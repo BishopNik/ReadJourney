@@ -12,8 +12,9 @@ export const LoginSchema = Yup.object().shape({
 		.email('Invalid email address')
 		.required('This is a required field'),
 	password: Yup.string()
+		.min(6, 'Too Short!')
 		.required('This is a required field')
-		.matches(passwordRegex, 'Invalid password'),
+		.matches(passwordRegex, 'Enter a valid Password*'),
 });
 
 export const RegisterSchema = Yup.object().shape({
@@ -24,6 +25,6 @@ export const RegisterSchema = Yup.object().shape({
 		.required('This is a required field'),
 	password: Yup.string()
 		.min(6, 'Too Short!')
-		.matches(passwordRegex, 'Invalid password')
-		.required('This is a required field'),
+		.required('This is a required field')
+		.matches(passwordRegex, 'Enter a valid Password*'),
 });

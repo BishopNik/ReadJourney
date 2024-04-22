@@ -3,12 +3,11 @@
 import axios from 'axios';
 import { toastError } from 'helpers';
 
-export const fetchRecommendedBooks = async (title, author, page, limit) => {
+export const fetchRecommendedBooks = async (page = 1, limit = 2, title = '', author = '') => {
 	try {
-		const res = await axios.get(`/books/recommend?page=${page}&limit=${limit}`, {
-			title,
-			author,
-		});
+		const res = await axios.get(
+			`/books/recommend?page=${page}&limit=${limit}&title=${title}&author=${author}`
+		);
 		return res.data;
 	} catch ({ response }) {
 		toastError(response?.data?.message);

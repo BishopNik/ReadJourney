@@ -10,6 +10,7 @@ import { useAuth } from 'hooks';
 import Loader from 'components/Loader';
 import Icon from 'components/Icon';
 import styles from './authform.module.css';
+import clsx from 'clsx';
 
 const AuthForm = () => {
 	const location = useLocation();
@@ -17,7 +18,7 @@ const AuthForm = () => {
 	const regPage = currentPage !== '/';
 	const dispatch = useDispatch();
 	const [showPassword, setShowPassword] = useState(false);
-	const { isLoading } = useAuth();
+	const { isLoading, errorUser } = useAuth();
 
 	const initialValues = { name: '', email: '', password: '' };
 
@@ -47,11 +48,17 @@ const AuthForm = () => {
 				}}
 				validationSchema={regPage ? RegisterSchema : LoginSchema}
 			>
-				{({ isSubmitting }) => (
+				{({ isSubmitting, errors, touched }) => (
 					<Form autoComplete='off'>
 						<div className={styles.field_container}>
 							{regPage && (
-								<label className={styles.field}>
+								<label
+									className={clsx(
+										styles.field,
+										errors.name && touched.name && styles.field_error,
+										!errors.name && touched.name && styles.field_success
+									)}
+								>
 									Name:
 									<Field
 										className={styles.field_input}
@@ -66,7 +73,13 @@ const AuthForm = () => {
 									/>
 								</label>
 							)}
-							<label className={styles.field}>
+							<label
+								className={clsx(
+									styles.field,
+									errors.email && touched.email && styles.field_error,
+									!errors.email && touched.email && styles.field_success
+								)}
+							>
 								Mail:
 								<Field
 									className={styles.field_input}
@@ -80,29 +93,47 @@ const AuthForm = () => {
 									component='span'
 								/>
 							</label>
-							<label className={styles.field}>
+							<label
+								className={clsx(
+									styles.field,
+									errors.password && touched.password && styles.field_error,
+									!errors.password && touched.password && styles.field_success
+								)}
+							>
 								Password:
 								<Field
 									className={styles.field_input}
 									name='password'
 									type={showPassword ? 'text' : 'password'}
-									placeholder='Yourpasswordhere'
+									placeholder={
+										showPassword ? 'Yourpasswordhere' : '****************'
+									}
 								/>
 								<button
 									className={styles.button_hide_password}
 									type='button'
 									onClick={togglePasswordVisibility}
 								>
-									<Icon
-										name={'hide-show'}
-										className={styles.icon_button_hide_password}
-									/>
+									{showPassword ? (
+										<Icon
+											name={'hide'}
+											className={styles.icon_button_hide_password}
+										/>
+									) : (
+										<Icon
+											name={'show'}
+											className={styles.icon_button_hide_password}
+										/>
+									)}
 								</button>
 								<ErrorMessage
 									className={styles.err_message}
 									name='password'
 									component='span'
 								/>
+								{!errors.password && touched.password && (
+									<span className={styles.err_success}>Password is secure</span>
+								)}
 							</label>
 						</div>
 						<ul className={styles.action_container}>
@@ -117,11 +148,14 @@ const AuthForm = () => {
 							</li>
 							<li>
 								{regPage ? (
-									<Link to={'/login'} className={styles.link_to_other_action}>
+									<Link to={'/'} className={styles.link_to_other_action}>
 										Already have an account?
 									</Link>
 								) : (
-									<Link to={'/'} className={styles.link_to_other_action}>
+									<Link
+										to={'/registration'}
+										className={styles.link_to_other_action}
+									>
 										Don’t have an account?
 									</Link>
 								)}
