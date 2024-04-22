@@ -31,14 +31,14 @@ function App() {
 			<Route path='/' element={<SharedLayout />}>
 				<Route
 					index
-					element={<RestrictedRoute component={<AuthPage />} redirectTo='/recomended' />}
+					element={<RestrictedRoute component={<AuthPage />} redirectTo='/recommended' />}
 				/>
 				<Route
-					path='/login'
-					element={<RestrictedRoute component={<AuthPage />} redirectTo='/recomended' />}
+					path='/registration'
+					element={<RestrictedRoute component={<AuthPage />} redirectTo='/recommended' />}
 				/>
 				<Route
-					path='/recomended'
+					path='/recommended'
 					element={<PrivateRoute component={<RecommendedPage />} redirectTo='/' />}
 				/>
 				<Route

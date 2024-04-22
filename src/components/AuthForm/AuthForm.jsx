@@ -14,7 +14,7 @@ import styles from './authform.module.css';
 const AuthForm = () => {
 	const location = useLocation();
 	const currentPage = location.pathname;
-	const regPage = currentPage === '/';
+	const regPage = currentPage !== '/';
 	const dispatch = useDispatch();
 	const [showPassword, setShowPassword] = useState(false);
 	const { isLoading } = useAuth();
