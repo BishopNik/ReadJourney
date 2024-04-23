@@ -7,9 +7,7 @@
 }
 
 .main_text {
-	margin: 0;
 	margin-bottom: 20px;
-	font-family: Gilroy;
 	font-size: 32px;
 	font-weight: 700;
 	line-height: 32px;
@@ -42,7 +40,6 @@
 	border-radius: 12px;
 	background-color: rgb(38, 38, 38);
 	color: rgb(104, 104, 104);
-	font-family: Gilroy;
 	font-size: 12px;
 	font-weight: 500;
 	line-height: 16px;
@@ -58,7 +55,6 @@
 	border: none;
 	outline: none;
 	color: rgb(249, 249, 249);
-	font-family: Gilroy;
 	font-size: 12px;
 	font-weight: 500;
 	line-height: 16px;
@@ -67,7 +63,6 @@
 
 .field_input::placeholder {
 	color: rgb(249, 249, 249);
-	font-family: Gilroy;
 	font-size: 12px;
 	font-weight: 500;
 	line-height: 16px;
@@ -90,7 +85,6 @@
 	background-color: rgb(249, 249, 249);
 	border: 1px solid rgba(249, 249, 249, 1);
 	color: rgb(31, 31, 31);
-	font-family: Gilroy;
 	font-size: 14px;
 	font-weight: 700;
 	line-height: 18px;
@@ -130,7 +124,6 @@
 .link_to_other_action {
 	display: block;
 	color: rgb(104, 104, 104);
-	font-family: Gilroy;
 	font-size: 12px;
 	font-weight: 500;
 	line-height: 14px;

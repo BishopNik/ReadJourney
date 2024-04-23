@@ -13,3 +13,12 @@ export const fetchRecommendedBooks = async (page = 1, limit = 2, title = '', aut
 		toastError(response?.data?.message);
 	}
 };
+
+export const addBooksToLibrary = async id => {
+	try {
+		const res = await axios.post(`books/add/${id}`);
+		return res.data;
+	} catch ({ response }) {
+		toastError(response?.data?.message);
+	}
+};

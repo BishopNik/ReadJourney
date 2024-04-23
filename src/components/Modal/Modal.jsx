@@ -1,9 +1,7 @@
 /** @format */
 
-import React, { useContext, useEffect } from 'react';
+import React, { useEffect } from 'react';
 import Modal from 'react-modal';
-import { MainContext } from 'helpers';
-import styles from './modal.module.css';
 
 Modal.setAppElement('#modal-root');
 
@@ -29,10 +27,7 @@ const customStyles = {
 	},
 };
 
-const ModalWindow = ({ children }) => {
-	const { book, setBook } = useContext(MainContext);
-	const isOpen = book !== null;
-
+const ModalWindow = ({ children, classModal, isOpen, onRequestClose }) => {
 	useEffect(() => {
 		if (isOpen) document.body.style.overflow = 'hidden';
 		return () => {
@@ -42,9 +37,9 @@ const ModalWindow = ({ children }) => {
 
 	return (
 		<Modal
-			className={styles.main}
+			className={classModal}
 			isOpen={isOpen}
-			onRequestClose={() => setBook(null)}
+			onRequestClose={onRequestClose}
 			style={customStyles}
 			contentLabel='onRequestClose'
 		>

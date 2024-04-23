@@ -2,11 +2,11 @@
 
 import { Suspense } from 'react';
 import { Outlet } from 'react-router-dom';
+import HeaderComponent from 'components/Header';
+import { BookModal, SuccessModal } from 'components/Modal';
 import Loader from 'components/Loader';
 import { useAuth } from 'hooks';
 import styles from './sharedlayout.module.css';
-import HeaderComponent from 'components/Header';
-import { BookModal } from 'components/Modal';
 
 const SharedLayout = () => {
 	const { isLoggedIn } = useAuth();
@@ -18,10 +18,11 @@ const SharedLayout = () => {
 			</header>
 
 			<main>
+				<BookModal />
+				<SuccessModal />
 				<Suspense fallback={<Loader />}>
 					<Outlet />
 				</Suspense>
-				<BookModal />
 			</main>
 		</>
 	) : (

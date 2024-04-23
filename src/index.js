@@ -11,6 +11,7 @@ import { store, persistor } from './redux/store';
 import 'modern-normalize';
 import { Toaster } from 'react-hot-toast';
 import 'modern-normalize';
+import './styles/app.module.css';
 
 ReactDOM.createRoot(document.getElementById('root')).render(
 	<React.StrictMode>
