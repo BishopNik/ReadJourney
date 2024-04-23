@@ -1,0 +1,9 @@
+/** @format */
+
+.main {
+	width: 335px;
+	height: 421px;
+	border: 1px solid rgba(104, 104, 104, 0.2);
+	border-radius: 12px;
+	background-color: rgb(31, 31, 31);
+}

@@ -1,6 +1,6 @@
 /** @format */
 
-import React, { useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState } from 'react';
 import { Link } from 'react-router-dom';
 import { Form, Formik, Field } from 'formik';
 import clsx from 'clsx';
@@ -8,10 +8,11 @@ import EllipsisText from 'react-ellipsis-text';
 import Icon from 'components/Icon';
 import styles from '../styles/recommended.module.css';
 import Dashboard from 'components/Dashboard';
-import { fetchRecommendedBooks } from 'helpers';
+import { MainContext, fetchRecommendedBooks } from 'helpers';
 import Loader from 'components/Loader';
 
 function RecommendedPage() {
+	const { setBook } = useContext(MainContext);
 	const [isLoading, setIsLoading] = useState(false);
 	const [page, setPage] = useState(1);
 	const [pages, setPages] = useState(0);
@@ -192,7 +193,11 @@ function RecommendedPage() {
 				<ul className={styles.book_container}>
 					{books?.length
 						? books.map(book => (
-								<li className={styles.book} key={book._id}>
+								<li
+									className={styles.book}
+									key={book._id}
+									onClick={() => setBook(book)}
+								>
 									<img
 										className={styles.book_img}
 										src={book.imageUrl}

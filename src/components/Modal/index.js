@@ -1,5 +1,4 @@
 /** @format */
 
 export { default } from './Modal';
-export * from './Modal.styled';
-export * from './AddCardModal/AddCardModal';
+export { default as BookModal } from './BookModal';

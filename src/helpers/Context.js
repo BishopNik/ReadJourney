@@ -1,9 +1,19 @@
 /** @format */
 
-import React, { createContext } from 'react';
+import React, { createContext, useState } from 'react';
 
 export const MainContext = createContext();
 
 export const Context = ({ children }) => {
-	return <MainContext.Provider value={{}}>{children}</MainContext.Provider>;
+	const [book, setBook] = useState(null);
+	return (
+		<MainContext.Provider
+			value={{
+				book,
+				setBook,
+			}}
+		>
+			{children}
+		</MainContext.Provider>
+	);
 };

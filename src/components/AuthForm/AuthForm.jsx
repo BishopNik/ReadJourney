@@ -18,7 +18,7 @@ const AuthForm = () => {
 	const regPage = currentPage !== '/';
 	const dispatch = useDispatch();
 	const [showPassword, setShowPassword] = useState(false);
-	const { isLoading, errorUser } = useAuth();
+	const { isLoading } = useAuth();
 
 	const initialValues = { name: '', email: '', password: '' };
 
