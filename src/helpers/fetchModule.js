@@ -1,24 +1,78 @@
 /** @format */
 
 import axios from 'axios';
-import { toastError } from 'helpers';
+import { toastError, toastSuccess } from 'helpers';
 
 export const fetchRecommendedBooks = async (page = 1, limit = 2, title = '', author = '') => {
 	try {
-		const res = await axios.get(
-			`/books/recommend?page=${page}&limit=${limit}&title=${title}&author=${author}`
-		);
+		let url = `/books/recommend?page=${page}&limit=${limit}`;
+		if (title) {
+			url += `&title=${title}`;
+		}
+		if (author) {
+			url += `&author=${author}`;
+		}
+
+		const res = await axios.get(url);
 		return res.data;
 	} catch ({ response }) {
 		toastError(response?.data?.message);
+		if (response?.status === 401) {
+			window.location.reload();
+		}
 	}
 };
 
-export const addBooksToLibrary = async id => {
+export const addBookToLibraryById = async id => {
 	try {
-		const res = await axios.post(`books/add/${id}`);
+		const res = await axios.post(`/books/add/${id}`);
 		return res.data;
 	} catch ({ response }) {
 		toastError(response?.data?.message);
+		if (response?.status === 401) {
+			window.location.reload();
+		}
+	}
+};
+
+export const fetchOwnBooks = async (status = '') => {
+	try {
+		let url = `/books/own`;
+		if (status) {
+			url += `&status=${status}`;
+		}
+
+		const res = await axios.get(url);
+		return res.data;
+	} catch ({ response }) {
+		toastError(response?.data?.message);
+		if (response?.status === 401) {
+			window.location.reload();
+		}
+	}
+};
+
+export const addBookToLibrary = async (title, author, totalPages) => {
+	try {
+		const res = await axios.post(`/books/add`, { title, author, totalPages });
+		return res.status;
+	} catch ({ response }) {
+		toastError(response?.data?.message);
+		if (response?.status === 401) {
+			window.location.reload();
+		}
+	}
+};
+
+export const deleteBookFromLibrary = async id => {
+	try {
+		const res = await axios.delete(`/books/remove/${id}`);
+		toastSuccess('Book deleted from library.');
+		return res.data;
+	} catch ({ response }) {
+		toastError(response?.data?.message);
+		if (response?.status === 401) {
+			window.location.reload();
+		}
 	}
 };

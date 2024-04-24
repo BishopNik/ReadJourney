@@ -28,3 +28,11 @@ export const RegisterSchema = Yup.object().shape({
 		.required('This is a required field')
 		.matches(passwordRegex, 'Enter a valid Password*'),
 });
+
+export const AddBookSchema = Yup.object().shape({
+	title: Yup.string().trim().min(2, 'Too Short!').required('This is a required field'),
+	author: Yup.string().trim().min(2, 'Too Short!').required('This is a required field'),
+	totalPages: Yup.number()
+		.min(1, 'Should be greater than 0')
+		.required('This is a required field'),
+});

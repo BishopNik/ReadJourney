@@ -68,26 +68,30 @@ function RecommendedPage() {
 				>
 					{({ isSubmitting }) => (
 						<Form autoComplete='off'>
-							<div className={styles.field_container}>
-								<label className={styles.field}>
-									Book title:
-									<Field
-										className={styles.field_input}
-										name='title'
-										type='text'
-										placeholder='Enter text'
-									/>
-								</label>
-								<label className={styles.field}>
-									The author:
-									<Field
-										className={styles.field_input}
-										name='author'
-										type='text'
-										placeholder='Enter text'
-									/>
-								</label>
-							</div>
+							<ul className={styles.field_container}>
+								<li>
+									<label className={styles.field}>
+										Book title:
+										<Field
+											className={styles.field_input}
+											name='title'
+											type='text'
+											placeholder='Enter text'
+										/>
+									</label>
+								</li>
+								<li>
+									<label className={styles.field}>
+										The author:
+										<Field
+											className={styles.field_input}
+											name='author'
+											type='text'
+											placeholder='Enter text'
+										/>
+									</label>
+								</li>
+							</ul>
 							<ul className={styles.container_button_action}>
 								<li>
 									<button
@@ -144,7 +148,9 @@ function RecommendedPage() {
 							</Link>
 						</li>
 						<li className={styles.container_icon_link}>
-							<Icon name={'library'} className={styles.icon_link} />
+							<Link to={'/library'} className={styles.link_to}>
+								<Icon name={'library'} className={styles.icon_link} />
+							</Link>
 						</li>
 					</ul>
 				</div>

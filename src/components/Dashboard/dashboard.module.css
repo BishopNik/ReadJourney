@@ -1,7 +1,7 @@
 /** @format */
 
 .dashboard {
-	height: 478px;
+	height: fit-content;
 	border-radius: 30px;
 	background-color: rgb(31, 31, 31);
 	margin-bottom: 10px;

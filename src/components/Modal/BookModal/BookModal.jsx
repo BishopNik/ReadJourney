@@ -5,7 +5,7 @@ import EllipsisText from 'react-ellipsis-text';
 import Icon from 'components/Icon';
 import ModalWindow from '../Modal';
 import styles from './bookmodal.module.css';
-import { MainContext, addBooksToLibrary, toastError } from 'helpers';
+import { MainContext, addBookToLibraryById, toastError } from 'helpers';
 
 function BookModal() {
 	const { book, setBook, setIsOpenSuccessModal } = useContext(MainContext);
@@ -14,7 +14,7 @@ function BookModal() {
 	const onRequestClose = () => setBook(null);
 
 	const handlerAddToLibrary = async () => {
-		const data = await addBooksToLibrary(book._id);
+		const data = await addBookToLibraryById(book._id);
 		if (data._id) {
 			onRequestClose();
 			setIsOpenSuccessModal(true);

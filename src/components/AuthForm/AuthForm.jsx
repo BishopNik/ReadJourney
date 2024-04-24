@@ -4,13 +4,13 @@ import React, { useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import { Form, Formik, Field, ErrorMessage } from 'formik';
+import clsx from 'clsx';
 import { logIn, register } from 'redux/auth/operations';
 import { LoginSchema, RegisterSchema } from 'helpers/ModalSchemas';
 import { useAuth } from 'hooks';
 import Loader from 'components/Loader';
 import Icon from 'components/Icon';
 import styles from './authform.module.css';
-import clsx from 'clsx';
 
 const AuthForm = () => {
 	const location = useLocation();
