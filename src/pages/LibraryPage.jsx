@@ -18,7 +18,8 @@ import {
 } from 'helpers';
 
 function LibraryPage() {
-	const { setBook, isOpenSuccessModal, setIsOpenSuccessModal } = useContext(MainContext);
+	const { setBook, setBookOwn, isOpenSuccessModal, setIsOpenSuccessModal } =
+		useContext(MainContext);
 	const [isOpenSelect, setIsOpenSelect] = useState(false);
 	const [books, setBooks] = useState([]);
 	const [ownBooks, setOwnBooks] = useState([]);
@@ -143,6 +144,12 @@ function LibraryPage() {
 											name='title'
 											component='span'
 										/>
+										{errors.title && touched.title && styles.field_error && (
+											<Icon name={'error'} className={styles.icon_status} />
+										)}
+										{!errors.title && touched.title && styles.field_success && (
+											<Icon name={'success'} className={styles.icon_status} />
+										)}
 									</label>
 								</li>
 								<li>
@@ -165,6 +172,17 @@ function LibraryPage() {
 											name='author'
 											component='span'
 										/>
+										{errors.author && touched.author && styles.field_error && (
+											<Icon name={'error'} className={styles.icon_status} />
+										)}
+										{!errors.author &&
+											touched.author &&
+											styles.field_success && (
+												<Icon
+													name={'success'}
+													className={styles.icon_status}
+												/>
+											)}
 									</label>
 								</li>
 								<li>
@@ -191,6 +209,22 @@ function LibraryPage() {
 											name='totalPages'
 											component='span'
 										/>
+										{errors.totalPages &&
+											touched.totalPages &&
+											styles.field_error && (
+												<Icon
+													name={'error'}
+													className={styles.icon_status}
+												/>
+											)}
+										{!errors.totalPages &&
+											touched.totalPages &&
+											styles.field_success && (
+												<Icon
+													name={'success'}
+													className={styles.icon_status}
+												/>
+											)}
 									</label>
 								</li>
 							</ul>
@@ -272,7 +306,6 @@ function LibraryPage() {
 					</div>
 				</div>
 				<ul className={styles.book_container}>
-					{console.log(ownBooks)}
 					{ownBooks.length ? (
 						ownBooks
 							.filter(
@@ -284,7 +317,7 @@ function LibraryPage() {
 								<li
 									className={styles.my_library_book}
 									key={_id}
-									// onClick={() => setBook(book)}
+									onClick={() => setBookOwn({ _id, imageUrl, title, author })}
 								>
 									{imageUrl ? (
 										<img

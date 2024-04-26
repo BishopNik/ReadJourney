@@ -52,6 +52,18 @@ export const fetchOwnBooks = async (status = '') => {
 	}
 };
 
+export const fetchBook = async id => {
+	try {
+		const res = await axios.get(`/books/${id}`);
+		return res.data;
+	} catch ({ response }) {
+		toastError(response?.data?.message);
+		if (response?.status === 401) {
+			window.location.reload();
+		}
+	}
+};
+
 export const addBookToLibrary = async (title, author, totalPages) => {
 	try {
 		const res = await axios.post(`/books/add`, { title, author, totalPages });
@@ -68,6 +80,30 @@ export const deleteBookFromLibrary = async id => {
 	try {
 		const res = await axios.delete(`/books/remove/${id}`);
 		toastSuccess('Book deleted from library.');
+		return res.data;
+	} catch ({ response }) {
+		toastError(response?.data?.message);
+		if (response?.status === 401) {
+			window.location.reload();
+		}
+	}
+};
+
+export const startReadingBook = async (id, page) => {
+	try {
+		const res = await axios.post('/books/reading/start', { id, page });
+		return res.data;
+	} catch ({ response }) {
+		toastError(response?.data?.message);
+		if (response?.status === 401) {
+			window.location.reload();
+		}
+	}
+};
+
+export const stopReadingBook = async (id, page) => {
+	try {
+		const res = await axios.post('/books/reading/finish', { id, page });
 		return res.data;
 	} catch ({ response }) {
 		toastError(response?.data?.message);

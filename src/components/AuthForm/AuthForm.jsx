@@ -18,9 +18,18 @@ const AuthForm = () => {
 	const regPage = currentPage !== '/';
 	const dispatch = useDispatch();
 	const [showPassword, setShowPassword] = useState(false);
+	const [isHovered, setIsHovered] = useState(false);
 	const { isLoading } = useAuth();
 
 	const initialValues = { name: '', email: '', password: '' };
+
+	const handleMouseEnter = () => {
+		setIsHovered(true);
+	};
+
+	const handleMouseLeave = () => {
+		setIsHovered(false);
+	};
 
 	const togglePasswordVisibility = () => {
 		setShowPassword(!showPassword);
@@ -33,9 +42,7 @@ const AuthForm = () => {
 		actions.resetForm(initialValues);
 	};
 
-	return isLoading ? (
-		<Loader />
-	) : (
+	return (
 		<>
 			<Icon name={'logo'} className={styles.icon_logo} />
 			<h1 className={styles.main_text}>
@@ -71,6 +78,12 @@ const AuthForm = () => {
 										name='name'
 										component='span'
 									/>
+									{errors.name && touched.name && styles.field_error && (
+										<Icon name={'error'} className={styles.icon_status} />
+									)}
+									{!errors.name && touched.name && styles.field_success && (
+										<Icon name={'success'} className={styles.icon_status} />
+									)}
 								</label>
 							)}
 							<label
@@ -92,6 +105,12 @@ const AuthForm = () => {
 									name='email'
 									component='span'
 								/>
+								{errors.email && touched.email && styles.field_error && (
+									<Icon name={'error'} className={styles.icon_status} />
+								)}
+								{!errors.email && touched.email && styles.field_success && (
+									<Icon name={'success'} className={styles.icon_status} />
+								)}
 							</label>
 							<label
 								className={clsx(
@@ -99,33 +118,35 @@ const AuthForm = () => {
 									errors.password && touched.password && styles.field_error,
 									!errors.password && touched.password && styles.field_success
 								)}
+								onMouseEnter={handleMouseEnter}
+								onMouseLeave={handleMouseLeave}
 							>
 								Password:
 								<Field
 									className={styles.field_input}
 									name='password'
 									type={showPassword ? 'text' : 'password'}
-									placeholder={
-										showPassword ? 'Yourpasswordhere' : '****************'
-									}
+									placeholder={'Yourpasswordhere'}
 								/>
-								<button
-									className={styles.button_hide_password}
-									type='button'
-									onClick={togglePasswordVisibility}
-								>
-									{showPassword ? (
-										<Icon
-											name={'hide'}
-											className={styles.icon_button_hide_password}
-										/>
-									) : (
-										<Icon
-											name={'show'}
-											className={styles.icon_button_hide_password}
-										/>
-									)}
-								</button>
+								{isHovered && (
+									<button
+										className={styles.button_hide_password}
+										type='button'
+										onClick={togglePasswordVisibility}
+									>
+										{showPassword ? (
+											<Icon
+												name={'hide'}
+												className={styles.icon_button_hide_password}
+											/>
+										) : (
+											<Icon
+												name={'show'}
+												className={styles.icon_button_hide_password}
+											/>
+										)}
+									</button>
+								)}
 								<ErrorMessage
 									className={styles.err_message}
 									name='password'
@@ -133,6 +154,26 @@ const AuthForm = () => {
 								/>
 								{!errors.password && touched.password && (
 									<span className={styles.err_success}>Password is secure</span>
+								)}
+								{!isHovered && (
+									<>
+										{errors.password &&
+											touched.password &&
+											styles.field_error && (
+												<Icon
+													name={'error'}
+													className={styles.icon_status}
+												/>
+											)}
+										{!errors.password &&
+											touched.password &&
+											styles.field_success && (
+												<Icon
+													name={'success'}
+													className={styles.icon_status}
+												/>
+											)}
+									</>
 								)}
 							</label>
 						</div>
@@ -164,6 +205,7 @@ const AuthForm = () => {
 					</Form>
 				)}
 			</Formik>
+			{isLoading && <Loader />}
 		</>
 	);
 };

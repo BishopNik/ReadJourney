@@ -42,7 +42,7 @@ function App() {
 					element={<PrivateRoute component={<RecommendedPage />} redirectTo='/' />}
 				/>
 				<Route
-					path='/reading'
+					path='/read/:id'
 					element={<PrivateRoute component={<ReadingPage />} redirectTo='/' />}
 				/>
 				<Route

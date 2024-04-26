@@ -1,0 +1,63 @@
+/** @format */
+
+.main {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+	align-items: center;
+	gap: 21px;
+	padding: 20px 89px;
+}
+
+.progress_indicator_block {
+	width: 116px;
+	height: 116px;
+	display: flex;
+	justify-content: center;
+	align-items: center;
+	border-radius: 50%;
+	outline: 1px solid red;
+}
+
+.progress_indicator {
+	color: rgb(249, 249, 249);
+	font-size: 18px;
+	font-weight: 700;
+	line-height: 20px;
+	letter-spacing: -0.36px;
+}
+
+.statistics_block_2 {
+	display: flex;
+	gap: 15px;
+}
+
+.progress_icon {
+	width: 14px;
+	height: 14px;
+	border-radius: 4px;
+
+	background-color: rgb(48, 185, 77);
+}
+
+.total_page_read_block {
+	display: flex;
+	flex-direction: column;
+	gap: 4px;
+}
+
+.total_page_read_procent {
+	color: rgb(249, 249, 249);
+	font-size: 14px;
+	font-weight: 500;
+	line-height: 18px;
+	letter-spacing: -0.28px;
+}
+
+.total_page_read {
+	color: rgb(104, 104, 104);
+	font-size: 10px;
+	font-weight: 500;
+	line-height: 12px;
+	letter-spacing: -0.2px;
+}

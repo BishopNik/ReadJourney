@@ -164,3 +164,11 @@
 	font-size: 10px;
 	z-index: 100;
 }
+
+.icon_status {
+	position: absolute;
+	top: 13px;
+	right: 16px;
+	width: 18px;
+	height: 18px;
+}

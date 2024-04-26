@@ -1,6 +1,7 @@
 /** @format */
 
 .dashboard {
+	min-height: 390px;
 	height: fit-content;
 	border-radius: 30px;
 	background-color: rgb(31, 31, 31);

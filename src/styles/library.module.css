@@ -67,13 +67,8 @@
 	letter-spacing: -0.24px;
 }
 
-.container_button_action {
-	display: flex;
-	justify-content: space-between;
-}
-
 .button_action {
-	width: 98px;
+	width: 105px;
 	height: 38px;
 	margin-bottom: 20px;
 	display: flex;
@@ -439,6 +434,14 @@
 
 .field_success {
 	border: 1px solid rgb(48, 185, 77);
+}
+
+.icon_status {
+	position: absolute;
+	top: 13px;
+	right: 16px;
+	width: 18px;
+	height: 18px;
 }
 
 .filter_menu {
