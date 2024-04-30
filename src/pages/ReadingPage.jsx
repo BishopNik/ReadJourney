@@ -55,9 +55,9 @@ function ReadingPage() {
 				setStatusReading(true);
 			}
 			if (data.progress.length) {
-				if (data.progress[data.progress.length - 1].finishPage) {
+				if (data.progress[data.progress.length - 1]?.finishPage) {
 					setPage(data.progress[data.progress.length - 1].finishPage);
-				} else {
+				} else if (data.progress[data.progress.length - 2]?.finishPage) {
 					setPage(data.progress[data.progress.length - 2].finishPage);
 				}
 			}
@@ -99,7 +99,7 @@ function ReadingPage() {
 		if (
 			book &&
 			!statusReading &&
-			book.progress[book.progress.length - 1]?.finishPage === book.totalPages
+			book.progress[book.progress.length - 1]?.finishPage >= book.totalPages
 		) {
 			setIsOpenFullReadModal(true);
 		}
@@ -156,7 +156,7 @@ function ReadingPage() {
 						</Form>
 					)}
 				</Formik>
-				{book?.progress.length ? (
+				{book?.progress.length && book.progress[book.progress.length - 1]?.finishPage ? (
 					<>
 						<div className={styles.statistics_block}>
 							<p className={styles.statistics_title}>
@@ -224,32 +224,38 @@ function ReadingPage() {
 				)}
 			</Dashboard>
 
-			<li className={styles.read_book}>
-				<p className={styles.read_book_title}>My reading</p>
-				<ul className={styles.book} key={book?._id}>
-					<li className={styles.book_img_box}>
-						{book ? (
-							<img className={styles.book_img} src={book.imageUrl} alt='book' />
-						) : (
-							<p className={styles.book_img} />
-						)}
-					</li>
-					<li className={styles.book_title_box}>
-						<p className={styles.book_title}>{book && book.title}</p>
-					</li>
-					<li className={styles.book_author_box}>
-						<p className={styles.book_author}>{book && book.author}</p>
-					</li>
-				</ul>
-				<button className={styles.book_action_read} type='button' onClick={actionReadBook}>
-					<div
-						className={clsx(
-							styles.book_action_read_icon,
-							!statusReading ? styles.start_btn : styles.stop_btn
-						)}
-					></div>
-				</button>
-			</li>
+			{book && (
+				<li className={styles.read_book}>
+					<p className={styles.read_book_title}>My reading</p>
+					<ul className={styles.book} key={book?._id}>
+						<li className={styles.book_img_box}>
+							{book.imageUrl ? (
+								<img className={styles.book_img} src={book.imageUrl} alt='book' />
+							) : (
+								<p className={styles.book_img} />
+							)}
+						</li>
+						<li className={styles.book_title_box}>
+							<p className={styles.book_title}>{book && book.title}</p>
+						</li>
+						<li className={styles.book_author_box}>
+							<p className={styles.book_author}>{book && book.author}</p>
+						</li>
+					</ul>
+					<button
+						className={styles.book_action_read}
+						type='button'
+						onClick={actionReadBook}
+					>
+						<div
+							className={clsx(
+								styles.book_action_read_icon,
+								!statusReading ? styles.start_btn : styles.stop_btn
+							)}
+						></div>
+					</button>
+				</li>
+			)}
 		</ul>
 	);
 }
