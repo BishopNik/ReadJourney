@@ -306,18 +306,20 @@ function LibraryPage() {
 					</div>
 				</div>
 				<ul className={styles.book_container}>
-					{ownBooks.length ? (
+					{ownBooks?.length ? (
 						ownBooks
 							.filter(
 								({ status }) =>
 									status === selectedOption.toLowerCase() ||
 									selectedOption === 'All books'
 							)
-							.map(({ _id, imageUrl, title, author }) => (
+							.map(({ _id, imageUrl, title, author, totalPages }) => (
 								<li
 									className={styles.my_library_book}
 									key={_id}
-									onClick={() => setBookOwn({ _id, imageUrl, title, author })}
+									onClick={() =>
+										setBookOwn({ _id, imageUrl, title, author, totalPages })
+									}
 								>
 									{imageUrl ? (
 										<img

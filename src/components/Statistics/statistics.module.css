@@ -6,20 +6,28 @@
 	justify-content: center;
 	align-items: center;
 	gap: 21px;
+	width: 295px;
+	height: 211px;
+	border-radius: 12px;
+	background-color: rgb(38, 38, 38);
 	padding: 20px 89px;
 }
 
 .progress_indicator_block {
+	position: relative;
 	width: 116px;
 	height: 116px;
 	display: flex;
 	justify-content: center;
 	align-items: center;
 	border-radius: 50%;
-	outline: 1px solid red;
 }
 
 .progress_indicator {
+	position: absolute;
+	top: 50%;
+	left: 50%;
+	transform: translate(-50%, -50%);
 	color: rgb(249, 249, 249);
 	font-size: 18px;
 	font-weight: 700;
@@ -36,7 +44,6 @@
 	width: 14px;
 	height: 14px;
 	border-radius: 4px;
-
 	background-color: rgb(48, 185, 77);
 }
 

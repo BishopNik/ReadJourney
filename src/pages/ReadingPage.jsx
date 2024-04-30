@@ -1,8 +1,8 @@
 /** @format */
 
-import React, { useContext, useEffect, useState } from 'react';
+import React, { useContext, useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
-import { Form, Formik, Field, ErrorMessage } from 'formik';
+import { Form, Formik, Field } from 'formik';
 import clsx from 'clsx';
 import Icon from 'components/Icon';
 import styles from '../styles/reading.module.css';
@@ -13,6 +13,7 @@ import {
 	fetchBook,
 	startReadingBook,
 	stopReadingBook,
+	deleteReadingOfBook,
 	StartStopSchema,
 	MainContext,
 } from 'helpers';
@@ -24,30 +25,75 @@ function ReadingPage() {
 	const [isLoading, setIsLoading] = useState(null);
 	const [book, setBook] = useState(null);
 	const [page, setPage] = useState(0);
+	const [errorPageCount, setErrorPageCount] = useState(false);
 	const [statusReading, setStatusReading] = useState(false);
 
 	const actionReadBook = () => {
 		if (!statusReading) {
 			startReadingBook(book._id, page).then(data => {
-				setBook(data);
-				data && setStatusReading(!statusReading);
+				if (data) {
+					setBook(data);
+					setStatusReading(!statusReading);
+				}
 			});
 		} else {
 			stopReadingBook(book._id, page).then(data => {
-				setBook(data);
-				data && setStatusReading(!statusReading);
+				if (data) {
+					setBook(data);
+					setStatusReading(!statusReading);
+				}
 			});
 		}
 	};
 
-	useEffect(() => {
+	const fetchingData = useCallback(async () => {
 		setIsLoading(true);
-		fetchBook(id).then(data => {
+		const data = await fetchBook(id);
+		if (data) {
 			setBook(data);
-			setIsLoading(false);
-		});
-		return () => setBook(null);
+			if (data.progress.length && !data.progress[data.progress.length - 1].finishPage) {
+				setStatusReading(true);
+			}
+			if (data.progress.length) {
+				if (data.progress[data.progress.length - 1].finishPage) {
+					setPage(data.progress[data.progress.length - 1].finishPage);
+				} else {
+					setPage(data.progress[data.progress.length - 2].finishPage);
+				}
+			}
+		}
+		setIsLoading(false);
 	}, [id]);
+
+	const handlerDeleteReading = async idReading => {
+		const res = await deleteReadingOfBook(book._id, idReading);
+		if (res === 200) {
+			fetchingData();
+		}
+	};
+
+	const validateField = useCallback(
+		value => {
+			if (Number(value) > book.totalPages) {
+				setErrorPageCount('There is no such page in the book');
+			} else {
+				StartStopSchema.validate({ page: Number(value) })
+					.then(() => setErrorPageCount(null))
+					.catch(errors => setErrorPageCount(errors.message));
+			}
+		},
+		[book]
+	);
+
+	useEffect(() => {
+		if (!book) return;
+		validateField(page);
+	}, [book, page, validateField]);
+
+	useEffect(() => {
+		fetchingData();
+		return () => setBook(null);
+	}, [fetchingData]);
 
 	useEffect(() => {
 		if (
@@ -65,19 +111,18 @@ function ReadingPage() {
 				<p className={styles.title_dashboard}>Start page:</p>
 				<Formik
 					initialValues={{ page: page }}
-					onSubmit={({ setSubmitting }) => {
+					onSubmit={(_, { setSubmitting }) => {
 						setSubmitting(false);
+						if (errorPageCount) return;
 						actionReadBook();
 					}}
-					validationSchema={StartStopSchema}
 				>
-					{({ isSubmitting, touched, errors }) => (
+					{({ isSubmitting, touched }) => (
 						<Form autoComplete='off'>
 							<label
 								className={clsx(
 									styles.field,
-									errors.page && touched.page && styles.field_error,
-									!errors.page && touched.page && styles.field_success
+									errorPageCount ? styles.field_error : styles.field_success
 								)}
 							>
 								Page number:
@@ -86,18 +131,18 @@ function ReadingPage() {
 									value={page}
 									name='page'
 									type='number'
-									placeholder='0'
-									onChange={({ target }) => setPage(parseInt(target.value))}
+									placeholder='1'
+									onChange={({ target }) => {
+										validateField(target.value);
+										setPage(Number(target.value));
+									}}
 								/>
-								<ErrorMessage
-									className={styles.err_message}
-									name='page'
-									component='span'
-								/>
-								{errors.page && touched.page && styles.field_error && (
-									<Icon name={'error'} className={styles.icon_status} />
+								{errorPageCount && (
+									<span className={styles.err_message}>{errorPageCount}</span>
 								)}
-								{!errors.page && touched.page && styles.field_success && (
+								{errorPageCount ? (
+									<Icon name={'error'} className={styles.icon_status} />
+								) : (
 									<Icon name={'success'} className={styles.icon_status} />
 								)}
 							</label>
@@ -154,7 +199,11 @@ function ReadingPage() {
 						</div>
 						<div className={styles.statistics_data}>
 							{activeSection === 'diary' ? (
-								<Diary progress={book.progress} />
+								<Diary
+									progress={book.progress}
+									totalPages={book.totalPages}
+									deleteReadingOfBook={handlerDeleteReading}
+								/>
 							) : (
 								<Statictics progress={book.progress} totalPages={book.totalPages} />
 							)}

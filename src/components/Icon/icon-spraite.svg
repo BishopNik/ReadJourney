@@ -62,5 +62,15 @@
         <symbol id="icon-chevron-down" viewBox="0 0 16 16">
 		    <path d="M4 6L8 10L12 6" stroke="#F9F9F9" stroke-opacity="1.000000" stroke-width="1.500000" stroke-linejoin="round" stroke-linecap="round"/>
         </symbol>
+        <symbol id="icon-chart" viewBox="0 0 43 18">
+            <path d="M43 1L0 6.96L0 18L43 18L43 1Z" fill="#30B94D" fill-opacity="0.200000" fill-rule="nonzero"/>
+            <rect rx="1.000000" width="43.514305" height="2.175715" transform="matrix(-0.987181 0.159606 0.159606 0.987181 42.2471 0)" fill="#30B94D" fill-opacity="1.000000"/>
+        </symbol>
+        <symbol id="icon-trash-2" viewBox="0 0 14 14">
+            <path d="M1.75 3.5L2.91 3.5L12.25 3.5" stroke-opacity="1.000000" stroke-width="1.000000" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M11.08 3.49L11.08 11.66C11.08 11.97 10.96 12.27 10.74 12.49C10.52 12.71 10.22 12.83 9.91 12.83L4.08 12.83C3.77 12.83 3.47 12.71 3.25 12.49C3.04 12.27 2.91 11.97 2.91 11.66L2.91 3.49M4.66 3.49L4.66 2.33C4.66 2.02 4.79 1.72 5 1.5C5.22 1.28 5.52 1.16 5.83 1.16L8.16 1.16C8.47 1.16 8.77 1.28 8.99 1.5C9.21 1.72 9.33 2.02 9.33 2.33L9.33 3.49" stroke-opacity="1.000000" stroke-width="1.000000" stroke-linejoin="round"/>
+            <path d="M5.83 6.41L5.83 9.91" stroke-opacity="1.000000" stroke-width="1.000000" stroke-linejoin="round" stroke-linecap="round"/>
+            <path d="M8.16 6.41L8.16 9.91" stroke-opacity="1.000000" stroke-width="1.000000" stroke-linejoin="round" stroke-linecap="round"/>
+        </symbol>
     </defs>
 </svg>

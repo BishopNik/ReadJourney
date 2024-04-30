@@ -312,9 +312,30 @@
 	stroke: rgb(249, 249, 249);
 }
 
-.statistics_data {
-	width: 295px;
+.statistics_data_container {
+	position: relative;
+	width: 307px;
 	height: 211px;
 	border-radius: 12px;
+	background-color: rgb(31, 31, 31);
+}
+
+.statistics_data {
+	width: 307px;
+	height: 211px;
+	border-radius: 12px;
+	background-color: rgb(31, 31, 31);
+	overflow-y: scroll;
+}
+
+.statistics_data::-webkit-scrollbar {
+	width: 5px;
+	height: 100px;
+	background: rgb(31, 31, 31);
+	border-radius: 15px;
+}
+
+.statistics_data::-webkit-scrollbar-thumb {
 	background-color: rgb(38, 38, 38);
+	border-radius: 15px;
 }

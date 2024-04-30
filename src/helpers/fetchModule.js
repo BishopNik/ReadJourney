@@ -112,3 +112,16 @@ export const stopReadingBook = async (id, page) => {
 		}
 	}
 };
+
+export const deleteReadingOfBook = async (idBook, idReading) => {
+	try {
+		const res = await axios.delete(`/books/reading?bookId=${idBook}&readingId=${idReading}`);
+		toastSuccess('Reading of the book deleted.');
+		return res.status;
+	} catch ({ response }) {
+		toastError(response?.data?.message);
+		if (response?.status === 401) {
+			window.location.reload();
+		}
+	}
+};

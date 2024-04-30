@@ -38,5 +38,8 @@ export const AddBookSchema = Yup.object().shape({
 });
 
 export const StartStopSchema = Yup.object().shape({
-	page: Yup.number().min(1, 'Should be greater than 0').required('This is a required field'),
+	page: Yup.number()
+		.typeError('Should be a number')
+		.test('is-greater-than-zero', 'Should be greater than 0', value => value > 0)
+		.required('This is a required field'),
 });
