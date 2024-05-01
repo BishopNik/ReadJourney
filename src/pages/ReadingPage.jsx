@@ -23,6 +23,7 @@ function ReadingPage() {
 	const { id } = useParams();
 	const [activeSection, setActiveSection] = useState('diary');
 	const [isLoading, setIsLoading] = useState(null);
+	const [isReadBook, setIsReadBook] = useState(null);
 	const [book, setBook] = useState(null);
 	const [page, setPage] = useState(0);
 	const [errorPageCount, setErrorPageCount] = useState(false);
@@ -96,12 +97,15 @@ function ReadingPage() {
 	}, [fetchingData]);
 
 	useEffect(() => {
+		if (!book) return;
 		if (
-			book &&
 			!statusReading &&
 			book.progress[book.progress.length - 1]?.finishPage >= book.totalPages
 		) {
 			setIsOpenFullReadModal(true);
+			setIsReadBook(true);
+		} else {
+			setIsReadBook(false);
 		}
 	}, [book, setIsOpenFullReadModal, statusReading]);
 
@@ -122,7 +126,11 @@ function ReadingPage() {
 							<label
 								className={clsx(
 									styles.field,
-									errorPageCount ? styles.field_error : styles.field_success
+									!isReadBook && isReadBook !== null
+										? errorPageCount
+											? styles.field_error
+											: styles.field_success
+										: null
 								)}
 							>
 								Page number:
@@ -131,25 +139,28 @@ function ReadingPage() {
 									value={page}
 									name='page'
 									type='number'
-									placeholder='1'
+									placeholder='0'
+									disabled={isReadBook}
 									onChange={({ target }) => {
 										validateField(target.value);
 										setPage(Number(target.value));
 									}}
 								/>
-								{errorPageCount && (
+								{!isReadBook && errorPageCount && (
 									<span className={styles.err_message}>{errorPageCount}</span>
 								)}
-								{errorPageCount ? (
-									<Icon name={'error'} className={styles.icon_status} />
-								) : (
-									<Icon name={'success'} className={styles.icon_status} />
-								)}
+								{!isReadBook && isReadBook !== null ? (
+									errorPageCount ? (
+										<Icon name={'error'} className={styles.icon_status} />
+									) : (
+										<Icon name={'success'} className={styles.icon_status} />
+									)
+								) : null}
 							</label>
 							<button
 								className={styles.button_action}
 								type='submit'
-								disabled={isSubmitting}
+								disabled={isSubmitting || isReadBook}
 							>
 								{statusReading ? 'To stop' : 'To start'}
 							</button>

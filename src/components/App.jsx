@@ -2,7 +2,7 @@
 
 import { useEffect, lazy } from 'react';
 import { useDispatch } from 'react-redux';
-import { refreshUser } from 'redux/auth/operations';
+import { refreshTokens, refreshUser } from 'redux/auth/operations';
 import { Routes, Route } from 'react-router-dom';
 import { useAuth } from 'hooks';
 import { RestrictedRoute } from 'components/RestrictedRoute';
@@ -22,6 +22,12 @@ function App() {
 
 	useEffect(() => {
 		dispatch(refreshUser());
+	}, [dispatch]);
+
+	useEffect(() => {
+		const refreshInterval = setInterval(() => dispatch(refreshTokens()), 43200000);
+
+		return () => clearInterval(refreshInterval);
 	}, [dispatch]);
 
 	return isRefreshing ? (

@@ -7,7 +7,7 @@ import DonutChart from './DonutChart';
 function Statictics({ progress, totalPages }) {
 	const totalReadPages = progress.reduce((totalReadPages, process) => {
 		if (process?.finishPage && process?.startPage) {
-			const countPages = process.finishPage - process.startPage;
+			const countPages = process.finishPage - process.startPage + 1;
 			totalReadPages += countPages;
 			return totalReadPages;
 		}

@@ -33,7 +33,7 @@ function Diary({ progress, totalPages, deleteReadingOfBook }) {
 										</li>
 									</ul>
 									<p className={styles.item_pages}>
-										{el.finishPage - el.startPage} pages
+										{el.finishPage - el.startPage + 1} pages
 									</p>
 								</div>
 								<div className={styles.item_two}>
@@ -44,7 +44,9 @@ function Diary({ progress, totalPages, deleteReadingOfBook }) {
 													<p className={styles.stat_procent}>
 														{(
 															parseInt(
-																((el.finishPage - el.startPage) /
+																((el.finishPage -
+																	el.startPage +
+																	1) /
 																	totalPages) *
 																	100 *
 																	100,

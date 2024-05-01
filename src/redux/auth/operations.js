@@ -67,3 +67,20 @@ export const refreshUser = createAsyncThunk('auth/refreshUser', async (_, thunkA
 		return thunkAPI.rejectWithValue(response?.data?.message);
 	}
 });
+
+export const refreshTokens = createAsyncThunk('auth/refreshTokens', async (_, thunkAPI) => {
+	const state = thunkAPI.getState();
+	const refreshToken = state.auth.refreshToken;
+
+	if (refreshToken === null) {
+		return thunkAPI.rejectWithValue(`Error refreshing token.`);
+	}
+	try {
+		setAuthHeader(refreshToken);
+		const res = await axios.get('/users/current/refresh');
+		setAuthHeader(res.data.token);
+		return res.data;
+	} catch ({ response }) {
+		return thunkAPI.rejectWithValue(response?.data?.message);
+	}
+});

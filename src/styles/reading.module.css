@@ -80,6 +80,10 @@
 	cursor: pointer;
 }
 
+.button_action:disabled {
+	cursor: not-allowed;
+}
+
 .button_action:hover {
 	color: rgb(31, 31, 31);
 	background-color: rgb(249, 249, 249);
