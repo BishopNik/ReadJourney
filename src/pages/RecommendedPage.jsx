@@ -25,7 +25,7 @@ function RecommendedPage() {
 		if (window.innerWidth < 768) {
 			setPerPage(2);
 		} else if (window.innerWidth < 1280) {
-			// setPerPage(8);
+			setPerPage(8);
 		} else {
 			// setPerPage(10);
 		}

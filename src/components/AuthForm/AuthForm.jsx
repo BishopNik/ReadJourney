@@ -44,7 +44,10 @@ const AuthForm = () => {
 
 	return (
 		<>
-			<Icon name={'logo'} className={styles.icon_logo} />
+			<div className={styles.container_logo}>
+				<Icon name={'logo'} className={styles.icon_logo} />
+				<h2 className={styles.text_logo}>read journey</h2>
+			</div>
 			<h1 className={styles.main_text}>
 				Expand your mind, reading <span className={styles.main_text_ext}>a book</span>
 			</h1>
@@ -176,11 +179,15 @@ const AuthForm = () => {
 									</>
 								)}
 							</label>
+							{!regPage && <div className={styles.empty_field}></div>}
 						</div>
 						<ul className={styles.action_container}>
 							<li>
 								<button
-									className={styles.button_action}
+									className={clsx(
+										styles.button_action,
+										!regPage && styles.button_action_login
+									)}
 									type='submit'
 									disabled={isSubmitting}
 								>

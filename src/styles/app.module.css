@@ -30,6 +30,10 @@
 
 body,
 ul,
+h1,
+h2,
+h3,
+h4,
 p,
 button {
 	margin: 0;
@@ -41,7 +45,14 @@ ul {
 }
 
 :root {
-	font-family: Gilroy;
+	--font-family: 'Gilroy', sans-serif;
+	--second-family: 'SF Pro Text', sans-serif;
+	--third-family: 'Inter', sans-serif;
+	--white-color: rgb(249, 249, 249);
+	--black-color: rgb(38, 38, 38);
+	--black-color-background: rgb(31, 31, 31);
+
+	font-family: var(--font-family);
 	background-color: rgb(20, 20, 20);
 	padding: 20px 20px 40px 20px;
 }

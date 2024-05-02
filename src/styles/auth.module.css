@@ -13,7 +13,6 @@
 
 .form {
 	width: 335px;
-	height: 411px;
 	padding: 20px 20px 40px 20px;
 	border-radius: 30px;
 	background-color: rgb(31, 31, 31);
@@ -30,4 +29,19 @@
 
 .iphone_img {
 	width: 100%;
+}
+
+@media screen and (min-width: 768px) {
+	.main {
+		width: 768px;
+	}
+
+	.form {
+		width: 100%;
+		padding: 40px 64px 214px 64px;
+	}
+
+	.iphone {
+		display: none;
+	}
 }
