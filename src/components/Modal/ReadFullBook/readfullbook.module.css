@@ -8,6 +8,13 @@
 	background-color: rgb(31, 31, 31);
 }
 
+@media screen and (min-width: 768px) {
+	.main {
+		width: 342px;
+		height: 308px;
+	}
+}
+
 .menu_close {
 	position: absolute;
 	top: 16px;

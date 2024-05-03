@@ -4,6 +4,7 @@ import React, { useContext, useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { Form, Formik, Field } from 'formik';
 import clsx from 'clsx';
+import moment from 'moment';
 import Icon from 'components/Icon';
 import styles from '../styles/reading.module.css';
 import Dashboard from 'components/Dashboard';
@@ -28,6 +29,18 @@ function ReadingPage() {
 	const [page, setPage] = useState(0);
 	const [errorPageCount, setErrorPageCount] = useState(false);
 	const [statusReading, setStatusReading] = useState(false);
+
+	const totalReadTime = book?.progress.reduce((totalReadTime, process) => {
+		if (process?.finishPage && process?.startPage) {
+			const timeRead = moment(process.finishReading).diff(process.startReading, 'seconds');
+			totalReadTime += timeRead;
+			return totalReadTime;
+		}
+		return totalReadTime;
+	}, 0);
+	const duration = moment.duration(totalReadTime, 'seconds');
+	const hours = duration.hours();
+	const minutes = duration.minutes();
 
 	const actionReadBook = () => {
 		if (!statusReading) {
@@ -112,63 +125,67 @@ function ReadingPage() {
 	return (
 		<ul className={styles.main}>
 			<Dashboard>
-				<p className={styles.title_dashboard}>Start page:</p>
-				<Formik
-					initialValues={{ page: page }}
-					onSubmit={(_, { setSubmitting }) => {
-						setSubmitting(false);
-						if (errorPageCount) return;
-						actionReadBook();
-					}}
-				>
-					{({ isSubmitting, touched }) => (
-						<Form autoComplete='off'>
-							<label
-								className={clsx(
-									styles.field,
-									!isReadBook && isReadBook !== null
-										? errorPageCount
-											? styles.field_error
-											: styles.field_success
-										: null
-								)}
-							>
-								Page number:
-								<Field
-									className={styles.field_input}
-									value={page}
-									name='page'
-									type='number'
-									placeholder='0'
-									disabled={isReadBook}
-									onChange={({ target }) => {
-										validateField(target.value);
-										setPage(Number(target.value));
-									}}
-								/>
-								{!isReadBook && errorPageCount && (
-									<span className={styles.err_message}>{errorPageCount}</span>
-								)}
-								{!isReadBook && isReadBook !== null ? (
-									errorPageCount ? (
-										<Icon name={'error'} className={styles.icon_status} />
-									) : (
-										<Icon name={'success'} className={styles.icon_status} />
-									)
-								) : null}
-							</label>
-							<button
-								className={styles.button_action}
-								type='submit'
-								disabled={isSubmitting || isReadBook}
-							>
-								{statusReading ? 'To stop' : 'To start'}
-							</button>
-						</Form>
-					)}
-				</Formik>
+				<div>
+					<p className={styles.title_dashboard}>
+						{statusReading ? 'Stop' : 'Start'} page:
+					</p>
+					<Formik
+						initialValues={{ page: page }}
+						onSubmit={(_, { setSubmitting }) => {
+							setSubmitting(false);
+							if (errorPageCount) return;
+							actionReadBook();
+						}}
+					>
+						{({ isSubmitting, touched }) => (
+							<Form autoComplete='off'>
+								<label
+									className={clsx(
+										styles.field,
+										!isReadBook && isReadBook !== null
+											? errorPageCount
+												? styles.field_error
+												: styles.field_success
+											: null
+									)}
+								>
+									Page number:
+									<Field
+										className={styles.field_input}
+										value={page}
+										name='page'
+										type='number'
+										placeholder='0'
+										disabled={isReadBook}
+										onChange={({ target }) => {
+											validateField(target.value);
+											setPage(Number(target.value));
+										}}
+									/>
+									{!isReadBook && errorPageCount && (
+										<span className={styles.err_message}>{errorPageCount}</span>
+									)}
+									{!isReadBook && isReadBook !== null ? (
+										errorPageCount ? (
+											<Icon name={'error'} className={styles.icon_status} />
+										) : (
+											<Icon name={'success'} className={styles.icon_status} />
+										)
+									) : null}
+								</label>
+								<button
+									className={styles.button_action}
+									type='submit'
+									disabled={isSubmitting || isReadBook}
+								>
+									{statusReading ? 'To stop' : 'To start'}
+								</button>
+							</Form>
+						)}
+					</Formik>
+				</div>
 				{book?.progress.length && book.progress[book.progress.length - 1]?.finishPage ? (
-					<>
+					<div className={styles.statistics_container}>
 						<div className={styles.statistics_block}>
 							<p className={styles.statistics_title}>
 								{activeSection === 'diary' ? 'Diary' : 'Statistics'}
@@ -219,7 +236,7 @@ function ReadingPage() {
 								<Statictics progress={book.progress} totalPages={book.totalPages} />
 							)}
 						</div>
-					</>
+					</div>
 				) : (
 					isLoading === false && (
 						<>
@@ -237,7 +254,16 @@ function ReadingPage() {
 
 			{book && (
 				<li className={styles.read_book}>
-					<p className={styles.read_book_title}>My reading</p>
+					<ul className={styles.read_book_title_container}>
+						<li>
+							<p className={styles.read_book_title}>My reading</p>
+						</li>
+						<li>
+							<p className={styles.read_book_time}>
+								{hours ? `${hours} hours and` : null} {minutes} minutes left
+							</p>
+						</li>
+					</ul>
 					<ul className={styles.book} key={book?._id}>
 						<li className={styles.book_img_box}>
 							{book.imageUrl ? (
@@ -247,10 +273,10 @@ function ReadingPage() {
 							)}
 						</li>
 						<li className={styles.book_title_box}>
-							<p className={styles.book_title}>{book && book.title}</p>
+							<p className={styles.book_title}>{book.title}</p>
 						</li>
 						<li className={styles.book_author_box}>
-							<p className={styles.book_author}>{book && book.author}</p>
+							<p className={styles.book_author}>{book.author}</p>
 						</li>
 					</ul>
 					<button

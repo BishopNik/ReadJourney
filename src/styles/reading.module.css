@@ -9,12 +9,11 @@
 
 .title_dashboard {
 	margin: 0 0 8px 14px;
-	color: rgb(249, 249, 249);
-	font-size: 10px;
+	color: var(--white-color);
 	font-weight: 500;
-	line-height: 12px;
-	letter-spacing: -0.2px;
-	text-align: left;
+	font-size: 10px;
+	line-height: 120%;
+	letter-spacing: -0.02em;
 	cursor: default;
 }
 
@@ -30,35 +29,35 @@
 	margin-bottom: 20px;
 	padding: 0 0 0 14px;
 	border-radius: 12px;
-	background-color: rgb(38, 38, 38);
+	background-color: var(--black-color);
 	color: rgb(104, 104, 104);
-	font-size: 12px;
 	font-weight: 500;
-	line-height: 16px;
-	letter-spacing: -0.24px;
+	font-size: 12px;
+	line-height: 133%;
+	letter-spacing: -0.02em;
 }
 
 .field_input {
 	flex: 1;
 	height: 100%;
 	padding-right: 12px;
-	background-color: rgb(38, 38, 38);
+	background-color: var(--black-color);
 	border-radius: 0 12px 12px 0;
 	border: none;
 	outline: none;
-	color: rgb(249, 249, 249);
-	font-size: 12px;
+	color: var(--white-color);
 	font-weight: 500;
-	line-height: 16px;
-	letter-spacing: -0.24px;
+	font-size: 12px;
+	line-height: 133%;
+	letter-spacing: -0.02em;
 }
 
 .field_input::placeholder {
-	color: rgb(249, 249, 249);
-	font-size: 12px;
+	color: var(--white-color);
 	font-weight: 500;
-	line-height: 16px;
-	letter-spacing: -0.24px;
+	font-size: 12px;
+	line-height: 133%;
+	letter-spacing: -0.02em;
 }
 
 .button_action {
@@ -72,11 +71,11 @@
 	border: 1px solid rgba(249, 249, 249, 0.2);
 	border-radius: 30px;
 	background-color: transparent;
-	color: rgb(249, 249, 249);
-	font-size: 14px;
+	color: var(--white-color);
 	font-weight: 700;
-	line-height: 18px;
-	letter-spacing: 0.28px;
+	font-size: 14px;
+	line-height: 129%;
+	letter-spacing: 0.02em;
 	cursor: pointer;
 }
 
@@ -85,15 +84,15 @@
 }
 
 .button_action:hover {
-	color: rgb(31, 31, 31);
-	background-color: rgb(249, 249, 249);
+	color: var(--black-color-background);
+	background-color: var(--white-color);
 	transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1),
 		background-color 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .progress_title {
 	margin-bottom: 14px;
-	color: rgb(249, 249, 249);
+	color: var(--white-color);
 	font-size: 18px;
 	font-weight: 700;
 	line-height: 18px;
@@ -121,7 +120,7 @@
 	width: 80px;
 	height: 80px;
 	border-radius: 50%;
-	background-color: rgb(38, 38, 38);
+	background-color: var(--black-color);
 	color: rgb(0, 0, 0);
 	font-size: 32px;
 	font-weight: 500;
@@ -131,18 +130,25 @@
 .read_book {
 	padding: 40px 20px;
 	border-radius: 30px;
-	background-color: rgb(31, 31, 31);
+	background-color: var(--black-color-background);
+}
+
+.read_book_title_container {
+	margin-bottom: 40px;
 }
 
 .read_book_title {
 	display: inline-block;
-	margin-bottom: 40px;
-	color: rgb(249, 249, 249);
-	font-size: 20px;
+	color: var(--white-color);
 	font-weight: 700;
-	line-height: 20px;
-	letter-spacing: -0.4px;
+	font-size: 20px;
+	line-height: 100%;
+	letter-spacing: -0.02em;
 	cursor: default;
+}
+
+.read_book_time {
+	display: none;
 }
 
 .read_book_container {
@@ -159,6 +165,7 @@
 	justify-content: center;
 	margin-left: auto;
 	margin-right: auto;
+	border-radius: 8px;
 }
 
 .book_img_box {
@@ -180,11 +187,11 @@
 }
 
 .book_title {
-	color: rgb(249, 249, 249);
-	font-size: 14px;
+	color: var(--white-color);
 	font-weight: 700;
-	line-height: 18px;
-	letter-spacing: -0.28px;
+	font-size: 14px;
+	line-height: 129%;
+	letter-spacing: -0.02em;
 	text-align: center;
 }
 
@@ -202,10 +209,10 @@
 
 .book_author {
 	color: rgb(104, 104, 104);
-	font-size: 10px;
 	font-weight: 500;
-	line-height: 12px;
-	letter-spacing: -0.2px;
+	font-size: 10px;
+	line-height: 120%;
+	letter-spacing: -0.02em;
 	text-align: center;
 }
 
@@ -224,13 +231,13 @@
 	margin-left: auto;
 	margin-right: auto;
 	border-radius: 50%;
-	border: 2px solid rgb(249, 249, 249);
+	border: 2px solid var(--white-color);
 	background-color: transparent;
 	cursor: pointer;
 }
 
 .book_action_read_icon {
-	background-color: red;
+	background-color: rgb(233, 5, 22);
 }
 
 .start_btn {
@@ -240,13 +247,14 @@
 }
 
 .stop_btn {
+	border-radius: 3px;
 	width: 15px;
 	height: 15px;
 }
 
 .err_message {
 	position: absolute;
-	background-color: rgb(31, 31, 31);
+	background-color: var(--black-color-background);
 	color: rgb(233, 5, 22);
 	bottom: -1px;
 	left: 14px;
@@ -274,6 +282,10 @@
 	height: 18px;
 }
 
+.statistics_container {
+	width: 307px;
+}
+
 .statistics_block {
 	display: flex;
 	justify-content: space-between;
@@ -281,16 +293,17 @@
 }
 
 .statistics_title {
-	color: rgb(249, 249, 249);
-	font-size: 18px;
+	color: var(--white-color);
 	font-weight: 700;
-	line-height: 18px;
-	letter-spacing: -0.36px;
+	font-size: 18px;
+	line-height: 100%;
+	letter-spacing: -0.02em;
 }
 
 .statistics_btns {
 	display: flex;
 	gap: 8px;
+	padding-right: 12px;
 }
 
 .button_statistics {
@@ -308,12 +321,12 @@
 }
 
 .icon_statistics:hover {
-	stroke: rgb(249, 249, 249);
+	stroke: var(--white-color);
 	transition: stroke 250ms cubic-bezier(0.4, 0, 0.2, 1);
 }
 
 .icon_statistics_ext {
-	stroke: rgb(249, 249, 249);
+	stroke: var(--white-color);
 }
 
 .statistics_data_container {
@@ -321,25 +334,155 @@
 	width: 307px;
 	height: 211px;
 	border-radius: 12px;
-	background-color: rgb(31, 31, 31);
+	background-color: var(--black-color-background);
 }
 
 .statistics_data {
 	width: 307px;
 	height: 211px;
 	border-radius: 12px;
-	background-color: rgb(31, 31, 31);
+	background-color: var(--black-color-background);
 	overflow-y: scroll;
 }
 
 .statistics_data::-webkit-scrollbar {
 	width: 5px;
 	height: 100px;
-	background: rgb(31, 31, 31);
+	background: var(--black-color-background);
 	border-radius: 15px;
 }
 
 .statistics_data::-webkit-scrollbar-thumb {
-	background-color: rgb(38, 38, 38);
+	background-color: var(--black-color);
 	border-radius: 15px;
+}
+
+@media screen and (min-width: 768px) {
+	.main {
+		width: 704px;
+	}
+
+	.title_dashboard {
+		font-size: 14px;
+		line-height: 129%;
+	}
+
+	.field,
+	.field_input,
+	.field_input::placeholder {
+		font-size: 14px;
+		line-height: 129%;
+	}
+
+	.field {
+		height: 50px;
+	}
+
+	.button_action {
+		width: 114px;
+		height: 42px;
+		font-size: 16px;
+		line-height: 112%;
+	}
+
+	.statistics_data_container {
+		width: 332px;
+		height: 252px;
+	}
+
+	.statistics_data {
+		width: 332px;
+		height: 252px;
+	}
+
+	.statistics_container {
+		width: 332px;
+	}
+
+	.statistics_btns {
+		padding-right: 27px;
+	}
+
+	.statistics_title {
+		font-size: 20px;
+	}
+
+	.icon_statistics {
+		width: 20px;
+		height: 20px;
+	}
+
+	.read_book {
+		padding: 40px 40px 25px 40px;
+	}
+
+	.read_book_title_container {
+		display: flex;
+		justify-content: space-between;
+	}
+
+	.read_book_title {
+		font-size: 28px;
+		line-height: 114%;
+		letter-spacing: 0.02em;
+	}
+
+	.read_book_time {
+		display: block;
+		font-weight: 500;
+		font-size: 14px;
+		line-height: 129%;
+		letter-spacing: -0.02em;
+		color: #686868;
+	}
+
+	.book {
+		display: flex;
+		flex-direction: column;
+		align-items: center;
+		min-width: 317px;
+	}
+
+	.book_img {
+		width: 169px;
+		height: 256px;
+	}
+
+	.book_action_read {
+		width: 50px;
+		height: 50px;
+	}
+
+	.start_btn {
+		width: 40px;
+		height: 40px;
+	}
+
+	.stop_btn {
+		width: 20px;
+		height: 20px;
+	}
+
+	.book_img_box {
+		margin-bottom: 25px;
+	}
+
+	.book_title_box {
+		margin-bottom: 4px;
+	}
+
+	.book_author_box {
+		margin-bottom: 16px;
+	}
+
+	.book_title {
+		font-size: 20px;
+		line-height: 100%;
+	}
+
+	.book_author {
+		font-weight: 700;
+		font-size: 14px;
+		line-height: 129%;
+	}
 }

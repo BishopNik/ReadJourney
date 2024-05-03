@@ -9,5 +9,12 @@
 	margin-right: auto;
 	padding: 0 20px;
 	border-radius: 15px;
-	background-color: rgb(31, 31, 31);
+	background-color: var(--black-color-background);
+}
+
+@media screen and (min-width: 768px) {
+	.main {
+		width: 704px;
+		height: 74px;
+	}
 }
