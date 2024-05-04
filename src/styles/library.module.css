@@ -471,3 +471,9 @@
 .filter_menu_item_ext {
 	color: rgb(249, 249, 249);
 }
+
+@media screen and (min-width: 768px) {
+	.main {
+		width: 704px;
+	}
+}

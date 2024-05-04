@@ -111,133 +111,156 @@ function LibraryPage() {
 	return (
 		<ul className={styles.main}>
 			<Dashboard>
-				<p className={styles.title_dashboard}>Filters:</p>
-				<Formik
-					initialValues={{ title: '', author: '', totalPages: 0 }}
-					onSubmit={(value, { setSubmitting, resetForm }) => {
-						handleAddBook(value);
-						setSubmitting(false);
-						resetForm();
-					}}
-					validationSchema={AddBookSchema}
-				>
-					{({ isSubmitting, errors, touched }) => (
-						<Form autoComplete='off'>
-							<ul className={styles.field_container}>
-								<li>
-									<label
-										className={clsx(
-											styles.field,
-											errors.title && touched.title && styles.field_error,
-											!errors.title && touched.title && styles.field_success
-										)}
-									>
-										Book title:
-										<Field
-											className={styles.field_input}
-											name='title'
-											type='text'
-											placeholder='Enter text'
-										/>
-										<ErrorMessage
-											className={styles.err_message}
-											name='title'
-											component='span'
-										/>
-										{errors.title && touched.title && styles.field_error && (
-											<Icon name={'error'} className={styles.icon_status} />
-										)}
-										{!errors.title && touched.title && styles.field_success && (
-											<Icon name={'success'} className={styles.icon_status} />
-										)}
-									</label>
-								</li>
-								<li>
-									<label
-										className={clsx(
-											styles.field,
-											errors.author && touched.author && styles.field_error,
-											!errors.author && touched.author && styles.field_success
-										)}
-									>
-										The author:
-										<Field
-											className={styles.field_input}
-											name='author'
-											type='text'
-											placeholder='Enter text'
-										/>
-										<ErrorMessage
-											className={styles.err_message}
-											name='author'
-											component='span'
-										/>
-										{errors.author && touched.author && styles.field_error && (
-											<Icon name={'error'} className={styles.icon_status} />
-										)}
-										{!errors.author &&
-											touched.author &&
-											styles.field_success && (
-												<Icon
-													name={'success'}
-													className={styles.icon_status}
-												/>
+				<div>
+					<p className={styles.title_dashboard}>Filters:</p>
+					<Formik
+						initialValues={{ title: '', author: '', totalPages: 0 }}
+						onSubmit={(value, { setSubmitting, resetForm }) => {
+							handleAddBook(value);
+							setSubmitting(false);
+							resetForm();
+						}}
+						validationSchema={AddBookSchema}
+					>
+						{({ isSubmitting, errors, touched }) => (
+							<Form autoComplete='off'>
+								<ul className={styles.field_container}>
+									<li>
+										<label
+											className={clsx(
+												styles.field,
+												errors.title && touched.title && styles.field_error,
+												!errors.title &&
+													touched.title &&
+													styles.field_success
 											)}
-									</label>
-								</li>
-								<li>
-									<label
-										className={clsx(
-											styles.field,
-											errors.totalPages &&
+										>
+											Book title:
+											<Field
+												className={styles.field_input}
+												name='title'
+												type='text'
+												placeholder='Enter text'
+											/>
+											<ErrorMessage
+												className={styles.err_message}
+												name='title'
+												component='span'
+											/>
+											{errors.title &&
+												touched.title &&
+												styles.field_error && (
+													<Icon
+														name={'error'}
+														className={styles.icon_status}
+													/>
+												)}
+											{!errors.title &&
+												touched.title &&
+												styles.field_success && (
+													<Icon
+														name={'success'}
+														className={styles.icon_status}
+													/>
+												)}
+										</label>
+									</li>
+									<li>
+										<label
+											className={clsx(
+												styles.field,
+												errors.author &&
+													touched.author &&
+													styles.field_error,
+												!errors.author &&
+													touched.author &&
+													styles.field_success
+											)}
+										>
+											The author:
+											<Field
+												className={styles.field_input}
+												name='author'
+												type='text'
+												placeholder='Enter text'
+											/>
+											<ErrorMessage
+												className={styles.err_message}
+												name='author'
+												component='span'
+											/>
+											{errors.author &&
+												touched.author &&
+												styles.field_error && (
+													<Icon
+														name={'error'}
+														className={styles.icon_status}
+													/>
+												)}
+											{!errors.author &&
+												touched.author &&
+												styles.field_success && (
+													<Icon
+														name={'success'}
+														className={styles.icon_status}
+													/>
+												)}
+										</label>
+									</li>
+									<li>
+										<label
+											className={clsx(
+												styles.field,
+												errors.totalPages &&
+													touched.totalPages &&
+													styles.field_error,
+												!errors.totalPages &&
+													touched.totalPages &&
+													styles.field_success
+											)}
+										>
+											Number of pages:
+											<Field
+												className={styles.field_input}
+												name='totalPages'
+												type='number'
+												placeholder='0'
+											/>
+											<ErrorMessage
+												className={styles.err_message}
+												name='totalPages'
+												component='span'
+											/>
+											{errors.totalPages &&
 												touched.totalPages &&
-												styles.field_error,
-											!errors.totalPages &&
+												styles.field_error && (
+													<Icon
+														name={'error'}
+														className={styles.icon_status}
+													/>
+												)}
+											{!errors.totalPages &&
 												touched.totalPages &&
-												styles.field_success
-										)}
-									>
-										Number of pages:
-										<Field
-											className={styles.field_input}
-											name='totalPages'
-											type='number'
-											placeholder='0'
-										/>
-										<ErrorMessage
-											className={styles.err_message}
-											name='totalPages'
-											component='span'
-										/>
-										{errors.totalPages &&
-											touched.totalPages &&
-											styles.field_error && (
-												<Icon
-													name={'error'}
-													className={styles.icon_status}
-												/>
-											)}
-										{!errors.totalPages &&
-											touched.totalPages &&
-											styles.field_success && (
-												<Icon
-													name={'success'}
-													className={styles.icon_status}
-												/>
-											)}
-									</label>
-								</li>
-							</ul>
-							<button
-								className={styles.button_action}
-								type='submit'
-								disabled={isSubmitting}
-							>
-								Add book
-							</button>
-						</Form>
-					)}
-				</Formik>
+												styles.field_success && (
+													<Icon
+														name={'success'}
+														className={styles.icon_status}
+													/>
+												)}
+										</label>
+									</li>
+								</ul>
+								<button
+									className={styles.button_action}
+									type='submit'
+									disabled={isSubmitting}
+								>
+									Add book
+								</button>
+							</Form>
+						)}
+					</Formik>
+				</div>
 				<div className={styles.recomm_book_block}>
 					<p className={styles.recomm_book_title}>Recommended books</p>
 					<ul className={styles.list_container}>

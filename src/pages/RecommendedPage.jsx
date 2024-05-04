@@ -53,68 +53,70 @@ function RecommendedPage() {
 	return (
 		<ul className={styles.main}>
 			<Dashboard>
-				<p className={styles.title_dashboard}>Filters:</p>
-				<Formik
-					initialValues={{ title: '', author: '' }}
-					onSubmit={({ title, author }, { setSubmitting }) => {
-						setTitle(title);
-						setAuthor(author);
-						setSubmitting(false);
-					}}
-					onReset={() => {
-						setTitle('');
-						setAuthor('');
-					}}
-				>
-					{({ isSubmitting }) => (
-						<Form autoComplete='off'>
-							<ul className={styles.field_container}>
-								<li>
-									<label className={styles.field}>
-										Book title:
-										<Field
-											className={styles.field_input}
-											name='title'
-											type='text'
-											placeholder='Enter text'
-										/>
-									</label>
-								</li>
-								<li>
-									<label className={styles.field}>
-										The author:
-										<Field
-											className={styles.field_input}
-											name='author'
-											type='text'
-											placeholder='Enter text'
-										/>
-									</label>
-								</li>
-							</ul>
-							<ul className={styles.container_button_action}>
-								<li>
-									<button
-										className={styles.button_action}
-										type='submit'
-										disabled={isSubmitting}
-									>
-										To apply
-									</button>
-								</li>
-								<li>
-									<button
-										className={styles.button_action}
-										type='reset'
-										disabled={isSubmitting}
-									>
-										Clear
-									</button>
-								</li>
-							</ul>
-						</Form>
-					)}
-				</Formik>
+				<div>
+					<p className={styles.title_dashboard}>Filters:</p>
+					<Formik
+						initialValues={{ title: '', author: '' }}
+						onSubmit={({ title, author }, { setSubmitting }) => {
+							setTitle(title);
+							setAuthor(author);
+							setSubmitting(false);
+						}}
+						onReset={() => {
+							setTitle('');
+							setAuthor('');
+						}}
+					>
+						{({ isSubmitting }) => (
+							<Form autoComplete='off'>
+								<ul className={styles.field_container}>
+									<li>
+										<label className={styles.field}>
+											Book title:
+											<Field
+												className={styles.field_input}
+												name='title'
+												type='text'
+												placeholder='Enter text'
+											/>
+										</label>
+									</li>
+									<li>
+										<label className={styles.field}>
+											The author:
+											<Field
+												className={styles.field_input}
+												name='author'
+												type='text'
+												placeholder='Enter text'
+											/>
+										</label>
+									</li>
+								</ul>
+								<ul className={styles.container_button_action}>
+									<li>
+										<button
+											className={styles.button_action}
+											type='submit'
+											disabled={isSubmitting}
+										>
+											To apply
+										</button>
+									</li>
+									<li>
+										<button
+											className={styles.button_action}
+											type='reset'
+											disabled={isSubmitting}
+										>
+											Clear
+										</button>
+									</li>
+								</ul>
+							</Form>
+						)}
+					</Formik>
+				</div>
 				<div className={styles.library_block}>
 					<p className={styles.library_title}>Start your workout</p>
 					<ul className={styles.list_container}>
@@ -157,45 +159,50 @@ function RecommendedPage() {
 			</Dashboard>
 			<li className={styles.recomm_book}>
 				{isLoading && <Loader />}
-				<p className={styles.title_recom}>Recommended</p>
-				<ul className={styles.button_nav_container}>
-					<li>
-						<button
-							className={styles.button_nav}
-							type='button'
-							onClick={() => {
-								if (page <= 1) {
-									return;
-								}
-								setPage(page - 1);
-							}}
-							disabled={page <= 1}
-						>
-							<Icon
-								name={'nav_left'}
-								className={clsx(styles.icon_nav, page === 1 && styles.icon_ext)}
-							/>
-						</button>
-					</li>
-					<li>
-						<button
-							className={styles.button_nav}
-							type='button'
-							onClick={() => {
-								if (page >= pages) {
-									return;
-								}
-								setPage(page + 1);
-							}}
-							disabled={page >= pages}
-						>
-							<Icon
-								name={'nav_rigth'}
-								className={clsx(styles.icon_nav, page >= pages && styles.icon_ext)}
-							/>
-						</button>
-					</li>
-				</ul>
+				<div className={styles.title_recom_container}>
+					<p className={styles.title_recom}>Recommended</p>
+					<ul className={styles.button_nav_container}>
+						<li>
+							<button
+								className={styles.button_nav}
+								type='button'
+								onClick={() => {
+									if (page <= 1) {
+										return;
+									}
+									setPage(page - 1);
+								}}
+								disabled={page <= 1}
+							>
+								<Icon
+									name={'nav_left'}
+									className={clsx(styles.icon_nav, page === 1 && styles.icon_ext)}
+								/>
+							</button>
+						</li>
+						<li>
+							<button
+								className={styles.button_nav}
+								type='button'
+								onClick={() => {
+									if (page >= pages) {
+										return;
+									}
+									setPage(page + 1);
+								}}
+								disabled={page >= pages}
+							>
+								<Icon
+									name={'nav_rigth'}
+									className={clsx(
+										styles.icon_nav,
+										page >= pages && styles.icon_ext
+									)}
+								/>
+							</button>
+						</li>
+					</ul>
+				</div>
 				<ul className={styles.book_container}>
 					{books?.length
 						? books.map(book => (

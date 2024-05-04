@@ -15,7 +15,10 @@ const Header = () => {
 	const { user } = useAuth();
 	const [isOpenSidebar, setIsOpenSidebar] = useState(false);
 
-	const handleBurger = () => setIsOpenSidebar(!isOpenSidebar);
+	const handleBurger = () => {
+		if (window.innerWidth >= 768) return;
+		setIsOpenSidebar(!isOpenSidebar);
+	};
 
 	const handlerOnCloseWindow = useCallback(
 		({ target, key }) => {
@@ -93,10 +96,46 @@ const Header = () => {
 				</div>
 			)}
 			<Icon name={'logo'} className={styles.icon_logo} />
-			<div className={styles.user_logo}>{user.name[0]}</div>
+			<div className={styles.user_logo_mobile}>{user.name[0]}</div>
 			<button type='button' className={styles.burger_button} onClick={handleBurger}>
 				<Icon name={'menu'} className={styles.icon_menu} />
 			</button>
+			<ul className={styles.link_container}>
+				<li>
+					<Link
+						to={'/recommended'}
+						className={clsx(
+							styles.link_to_other_action,
+							pathname === '/recommended' && styles.link_to_ext
+						)}
+						onClick={handleBurger}
+					>
+						Home
+					</Link>
+				</li>
+				<li>
+					<Link
+						to={'/library'}
+						className={clsx(
+							styles.link_to_other_action,
+							pathname === '/library' && styles.link_to_ext
+						)}
+						onClick={handleBurger}
+					>
+						My library
+					</Link>
+				</li>
+			</ul>
+			<div className={styles.container_user_logo_tablet}>
+				<div className={styles.user_logo_tablet}>{user.name[0]}</div>
+				<button
+					type='button'
+					className={styles.button_logout_tablet}
+					onClick={() => dispatch(logOut())}
+				>
+					Log out
+				</button>
+			</div>
 		</>
 	);
 };
