@@ -100,7 +100,7 @@ const Header = () => {
 			<button type='button' className={styles.burger_button} onClick={handleBurger}>
 				<Icon name={'menu'} className={styles.icon_menu} />
 			</button>
-			<ul className={styles.link_container}>
+			<ul className={styles.link_container_tablet}>
 				<li>
 					<Link
 						to={'/recommended'}

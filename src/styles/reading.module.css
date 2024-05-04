@@ -93,21 +93,19 @@
 .progress_title {
 	margin-bottom: 14px;
 	color: var(--white-color);
-	font-size: 18px;
 	font-weight: 700;
-	line-height: 18px;
-	letter-spacing: -0.36px;
-	text-align: left;
+	font-size: 18px;
+	line-height: 100%;
+	letter-spacing: -0.02em;
 }
 
 .progress_text {
 	margin-bottom: 20px;
 	color: rgb(104, 104, 104);
-	font-size: 14px;
 	font-weight: 500;
-	line-height: 18px;
-	letter-spacing: -0.28px;
-	text-align: left;
+	font-size: 14px;
+	line-height: 129%;
+	letter-spacing: -0.02em;
 }
 
 .progress_container_logo {
@@ -122,9 +120,10 @@
 	border-radius: 50%;
 	background-color: var(--black-color);
 	color: rgb(0, 0, 0);
-	font-size: 32px;
 	font-weight: 500;
-	line-height: 32px;
+	font-size: 32px;
+	line-height: 100%;
+	letter-spacing: -0.02em;
 }
 
 .read_book {
@@ -411,9 +410,29 @@
 		font-size: 20px;
 	}
 
+	.progress_title {
+		font-size: 20px;
+	}
+
+	.progress_text {
+		width: 305px;
+		margin-bottom: 50px;
+	}
+
+	.progress_container_logo {
+		width: 100px;
+		height: 100px;
+		font-size: 50px;
+		line-height: 140%;
+	}
+
 	.icon_statistics {
 		width: 20px;
 		height: 20px;
+	}
+
+	.icon_status {
+		top: 16px;
 	}
 
 	.read_book {

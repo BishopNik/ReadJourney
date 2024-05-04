@@ -240,7 +240,7 @@ function ReadingPage() {
 					</div>
 				) : (
 					isLoading === false && (
-						<>
+						<div>
 							<p className={styles.progress_title}>Progress</p>
 
 							<p className={styles.progress_text}>
@@ -248,7 +248,7 @@ function ReadingPage() {
 								the red button above.
 							</p>
 							<p className={styles.progress_container_logo}>🌟</p>
-						</>
+						</div>
 					)
 				)}
 			</Dashboard>

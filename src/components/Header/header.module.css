@@ -137,6 +137,10 @@
 	display: none;
 }
 
+.link_container_tablet {
+	display: none;
+}
+
 @media screen and (min-width: 768px) {
 	.menu_backdrop {
 		display: none;
@@ -177,12 +181,12 @@
 		letter-spacing: -0.02em;
 	}
 
-	.link_container {
-		position: static;
+	.link_container_tablet {
+		display: flex;
 		flex-direction: row;
 		gap: 32px;
-		margin-top: 8px;
 		margin-right: 94px;
+		margin-bottom: 8px;
 	}
 
 	.link_to_other_action {
