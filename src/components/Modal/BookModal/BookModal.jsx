@@ -2,7 +2,6 @@
 
 import React, { useContext } from 'react';
 import { useNavigate } from 'react-router-dom';
-import EllipsisText from 'react-ellipsis-text';
 import Icon from 'components/Icon';
 import ModalWindow from '../Modal';
 import styles from './bookmodal.module.css';
@@ -49,9 +48,7 @@ function BookModal() {
 							)}
 						</li>
 						<li className={styles.book_title_box}>
-							<p className={styles.book_title}>
-								<EllipsisText text={element.title} length={19} />
-							</p>
+							<p className={styles.book_title}>{element.title}</p>
 						</li>
 						<li className={styles.book_author_box}>
 							<p className={styles.book_author}>{element.author}</p>

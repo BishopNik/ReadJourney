@@ -25,7 +25,7 @@ function App() {
 	}, [dispatch]);
 
 	useEffect(() => {
-		const refreshInterval = setInterval(() => dispatch(refreshTokens()), 43200000);
+		const refreshInterval = setInterval(() => dispatch(refreshTokens()), 3600000);
 
 		return () => clearInterval(refreshInterval);
 	}, [dispatch]);
