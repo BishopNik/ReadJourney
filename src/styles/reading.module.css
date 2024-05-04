@@ -236,6 +236,10 @@
 	cursor: pointer;
 }
 
+.book_action_read:disabled {
+	cursor: not-allowed;
+}
+
 .book_action_read_icon {
 	background-color: rgb(233, 5, 22);
 }

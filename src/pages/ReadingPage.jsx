@@ -22,6 +22,7 @@ import {
 function ReadingPage() {
 	const { setIsOpenFullReadModal } = useContext(MainContext);
 	const { id } = useParams();
+	const [isSubmitting, setIsSubmitting] = useState(false);
 	const [activeSection, setActiveSection] = useState('diary');
 	const [isLoading, setIsLoading] = useState(null);
 	const [isReadBook, setIsReadBook] = useState(null);
@@ -43,11 +44,13 @@ function ReadingPage() {
 	const minutes = duration.minutes();
 
 	const actionReadBook = () => {
+		setIsSubmitting(true);
 		if (!statusReading) {
 			startReadingBook(book._id, page).then(data => {
 				if (data) {
 					setBook(data);
 					setStatusReading(!statusReading);
+					setIsSubmitting(false);
 				}
 			});
 		} else {
@@ -55,6 +58,7 @@ function ReadingPage() {
 				if (data) {
 					setBook(data);
 					setStatusReading(!statusReading);
+					setIsSubmitting(false);
 				}
 			});
 		}
@@ -131,57 +135,54 @@ function ReadingPage() {
 					</p>
 					<Formik
 						initialValues={{ page: page }}
-						onSubmit={(_, { setSubmitting }) => {
-							setSubmitting(false);
+						onSubmit={_ => {
 							if (errorPageCount) return;
 							actionReadBook();
 						}}
 					>
-						{({ isSubmitting, touched }) => (
-							<Form autoComplete='off'>
-								<label
-									className={clsx(
-										styles.field,
-										!isReadBook && isReadBook !== null
-											? errorPageCount
-												? styles.field_error
-												: styles.field_success
-											: null
-									)}
-								>
-									Page number:
-									<Field
-										className={styles.field_input}
-										value={page}
-										name='page'
-										type='number'
-										placeholder='0'
-										disabled={isReadBook}
-										onChange={({ target }) => {
-											validateField(target.value);
-											setPage(Number(target.value));
-										}}
-									/>
-									{!isReadBook && errorPageCount && (
-										<span className={styles.err_message}>{errorPageCount}</span>
-									)}
-									{!isReadBook && isReadBook !== null ? (
-										errorPageCount ? (
-											<Icon name={'error'} className={styles.icon_status} />
-										) : (
-											<Icon name={'success'} className={styles.icon_status} />
-										)
-									) : null}
-								</label>
-								<button
-									className={styles.button_action}
-									type='submit'
-									disabled={isSubmitting || isReadBook}
-								>
-									{statusReading ? 'To stop' : 'To start'}
-								</button>
-							</Form>
-						)}
+						<Form autoComplete='off'>
+							<label
+								className={clsx(
+									styles.field,
+									!isReadBook && isReadBook !== null
+										? errorPageCount
+											? styles.field_error
+											: styles.field_success
+										: null
+								)}
+							>
+								Page number:
+								<Field
+									className={styles.field_input}
+									value={page}
+									name='page'
+									type='number'
+									placeholder='0'
+									disabled={isReadBook}
+									onChange={({ target }) => {
+										validateField(target.value);
+										setPage(Number(target.value));
+									}}
+								/>
+								{!isReadBook && errorPageCount && (
+									<span className={styles.err_message}>{errorPageCount}</span>
+								)}
+								{!isReadBook && isReadBook !== null ? (
+									errorPageCount ? (
+										<Icon name={'error'} className={styles.icon_status} />
+									) : (
+										<Icon name={'success'} className={styles.icon_status} />
+									)
+								) : null}
+							</label>
+							<button
+								className={styles.button_action}
+								type='submit'
+								disabled={isSubmitting || isReadBook}
+							>
+								{statusReading ? 'To stop' : 'To start'}
+							</button>
+						</Form>
 					</Formik>
 				</div>
 				{book?.progress.length && book.progress[book.progress.length - 1]?.finishPage ? (
@@ -283,6 +284,7 @@ function ReadingPage() {
 						className={styles.book_action_read}
 						type='button'
 						onClick={actionReadBook}
+						disabled={isSubmitting || isReadBook}
 					>
 						<div
 							className={clsx(

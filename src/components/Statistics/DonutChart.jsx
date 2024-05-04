@@ -30,7 +30,7 @@ const DonutChart = ({ data }) => {
 		if (window.innerWidth < 768) {
 			return 53;
 		} else if (window.innerWidth < 1280) {
-			return 63;
+			return 64;
 		} else {
 			return 76.5;
 		}
