@@ -1,10 +1,10 @@
 /** @format */
 
 import React from 'react';
-import styles from './dashboard.module.css';
+import clsx from 'clsx';
 
-function Dashboard({ children }) {
-	return <li className={styles.dashboard}>{children}</li>;
+function Dashboard({ children, style }) {
+	return <li className={clsx(style && style)}>{children}</li>;
 }
 
 export default Dashboard;

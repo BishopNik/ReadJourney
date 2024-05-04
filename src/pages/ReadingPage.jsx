@@ -128,7 +128,7 @@ function ReadingPage() {
 
 	return (
 		<ul className={styles.main}>
-			<Dashboard>
+			<Dashboard style={styles.dashboard_container}>
 				<div>
 					<p className={styles.title_dashboard}>
 						{statusReading ? 'Stop' : 'Start'} page:

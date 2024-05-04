@@ -7,6 +7,15 @@
 	padding-top: 10px;
 }
 
+.dashboard_container {
+	min-height: 390px;
+	height: fit-content;
+	border-radius: 30px;
+	background-color: var(--black-color-background);
+	margin-bottom: 10px;
+	padding: 20px;
+}
+
 .title_dashboard {
 	margin: 0 0 8px 14px;
 	color: var(--white-color);
@@ -363,6 +372,14 @@
 @media screen and (min-width: 768px) {
 	.main {
 		width: 704px;
+	}
+
+	.dashboard_container {
+		display: flex;
+		gap: 40px;
+		min-height: 336px;
+		margin-bottom: 16px;
+		padding: 32px 16px 16px 32px;
 	}
 
 	.title_dashboard {

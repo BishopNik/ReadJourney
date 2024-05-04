@@ -52,7 +52,7 @@ function RecommendedPage() {
 
 	return (
 		<ul className={styles.main}>
-			<Dashboard>
+			<Dashboard style={styles.dashboard_container}>
 				<div>
 					<p className={styles.title_dashboard}>Filters:</p>
 					<Formik
