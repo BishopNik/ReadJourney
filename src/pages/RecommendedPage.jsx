@@ -5,6 +5,7 @@ import { Link } from 'react-router-dom';
 import { Form, Formik, Field } from 'formik';
 import clsx from 'clsx';
 import EllipsisText from 'react-ellipsis-text';
+import debounce from 'lodash.debounce';
 import Icon from 'components/Icon';
 import styles from '../styles/recommended.module.css';
 import Dashboard from 'components/Dashboard';
@@ -16,24 +17,27 @@ function RecommendedPage() {
 	const [isLoading, setIsLoading] = useState(false);
 	const [page, setPage] = useState(1);
 	const [pages, setPages] = useState(0);
-	const [perPage, setPerPage] = useState(2);
 	const [books, setBooks] = useState([]);
 	const [title, setTitle] = useState('');
 	const [author, setAuthor] = useState('');
 
-	const handleResize = () => {
+	const setPerPage = () => {
 		if (window.innerWidth < 768) {
-			setPerPage(2);
+			return 2;
 		} else if (window.innerWidth < 1280) {
-			setPerPage(8);
+			return 8;
 		} else {
-			setPerPage(10);
+			return 10;
 		}
 	};
 
 	useEffect(() => {
+		const handleResize = debounce(() => {
+			window.location.reload();
+		}, 300);
+
 		window.addEventListener('resize', handleResize);
-		handleResize();
+
 		return () => {
 			window.removeEventListener('resize', handleResize);
 		};
@@ -42,13 +46,14 @@ function RecommendedPage() {
 	useEffect(() => {
 		setIsLoading(true);
 		setBooks([]);
+		const perPage = setPerPage();
 		fetchRecommendedBooks(page, perPage, title, author)
 			.then(data => {
 				data?.totalPages ? setPages(data.totalPages) : setPages(0);
 				setBooks(data?.results);
 			})
 			.finally(() => setIsLoading(false));
-	}, [page, perPage, author, title]);
+	}, [page, author, title]);
 
 	return (
 		<ul className={styles.main}>
