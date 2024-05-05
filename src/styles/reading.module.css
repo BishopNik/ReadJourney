@@ -392,6 +392,7 @@
 	.field_input::placeholder {
 		font-size: 14px;
 		line-height: 129%;
+		white-space: nowrap;
 	}
 
 	.field {

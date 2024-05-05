@@ -27,6 +27,10 @@ function LibraryPage() {
 	const [selectedOption, setSelectedOption] = useState('All books');
 	const options = ['Unread', 'In progress', 'Done', 'All books'];
 
+	const filtredBooks = ownBooks.filter(
+		({ status }) => status === selectedOption.toLowerCase() || selectedOption === 'All books'
+	);
+
 	const handleSelect = option => {
 		setSelectedOption(option);
 	};
@@ -104,7 +108,7 @@ function LibraryPage() {
 			fetchRecommendedBooks(newPage, 3).then(data => {
 				setBooks(data?.results);
 			});
-		}, 15000);
+		}, 30000);
 		return () => clearInterval(stId);
 	}, [pages]);
 
@@ -265,11 +269,13 @@ function LibraryPage() {
 					<p className={styles.recomm_book_title}>Recommended books</p>
 					<ul className={styles.list_container}>
 						{books?.length
-							? books?.map(({ _id, imageUrl, title, author }) => (
+							? books?.map(({ _id, imageUrl, title, author, totalPages }) => (
 									<li
 										className={styles.book}
 										key={_id}
-										onClick={() => setBook({ _id, imageUrl, title, author })}
+										onClick={() =>
+											setBook({ _id, imageUrl, title, author, totalPages })
+										}
 									>
 										<img
 											className={styles.book_img}
@@ -279,7 +285,9 @@ function LibraryPage() {
 										<p className={styles.book_title}>
 											<EllipsisText text={title} length={14} />
 										</p>
-										<p className={styles.book_author}>{author}</p>
+										<p className={styles.book_author}>
+											<EllipsisText text={author} length={14} />
+										</p>
 									</li>
 							  ))
 							: Array.from({ length: 3 }, (_, i) => (
@@ -330,13 +338,8 @@ function LibraryPage() {
 				</div>
 				<ul className={styles.book_container}>
 					{ownBooks?.length ? (
-						ownBooks
-							.filter(
-								({ status }) =>
-									status === selectedOption.toLowerCase() ||
-									selectedOption === 'All books'
-							)
-							.map(({ _id, imageUrl, title, author, totalPages }) => (
+						filtredBooks?.length ? (
+							filtredBooks.map(({ _id, imageUrl, title, author, totalPages }) => (
 								<li
 									className={styles.my_library_book}
 									key={_id}
@@ -366,6 +369,11 @@ function LibraryPage() {
 									</button>
 								</li>
 							))
+						) : (
+							<li className={styles.book_container_empty}>
+								<p className={styles.book_container_logo}>🆓</p>
+							</li>
+						)
 					) : (
 						<li className={styles.book_container_empty}>
 							<p className={styles.book_container_logo}>📚</p>
