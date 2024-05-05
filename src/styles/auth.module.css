@@ -45,3 +45,29 @@
 		display: none;
 	}
 }
+
+@media screen and (min-width: 1280px) {
+	.main {
+		display: flex;
+		flex-direction: row;
+		gap: 16px;
+		width: 1216px;
+		height: 736px;
+	}
+
+	.form {
+		width: 600px;
+		padding: 40px 64px;
+	}
+
+	.iphone {
+		display: block;
+		width: 600px;
+		height: 100%;
+		padding: 80px 87px 0 87px;
+	}
+
+	.iphone_img {
+		width: 100%;
+	}
+}
