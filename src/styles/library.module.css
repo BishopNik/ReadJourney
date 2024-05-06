@@ -587,3 +587,46 @@
 		gap: 25px;
 	}
 }
+
+@media screen and (min-width: 1280px) {
+	.main {
+		display: flex;
+		gap: 16px;
+		width: 1216px;
+		padding-top: 16px;
+	}
+
+	.dashboard_container {
+		flex-direction: column;
+		gap: 78px;
+		width: 353px;
+		padding: 40px 20px 20px 20px;
+		margin: 0;
+	}
+
+	.my_library {
+		width: 847px;
+		min-height: 651px;
+	}
+
+	.field_container {
+		margin-bottom: 20px;
+	}
+
+	.field {
+		width: 313px;
+	}
+
+	.recomm_book_block {
+		padding: 20px;
+	}
+
+	.book_container {
+		row-gap: 27px;
+		column-gap: 20px;
+	}
+
+	.book_container_empty {
+		bottom: 232px;
+	}
+}

@@ -116,7 +116,7 @@ function LibraryPage() {
 		<ul className={styles.main}>
 			<Dashboard style={styles.dashboard_container}>
 				<div>
-					<p className={styles.title_dashboard}>Filters:</p>
+					<p className={styles.title_dashboard}>Create your library:</p>
 					<Formik
 						initialValues={{ title: '', author: '', totalPages: 0 }}
 						onSubmit={(value, { setSubmitting, resetForm }) => {
