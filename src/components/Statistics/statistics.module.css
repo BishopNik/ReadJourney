@@ -101,3 +101,10 @@
 		line-height: 117%;
 	}
 }
+
+@media screen and (min-width: 1280px) {
+	.main {
+		width: 313px;
+		height: 281px;
+	}
+}

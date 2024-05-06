@@ -226,7 +226,21 @@ function ReadingPage() {
 								</li>
 							</ul>
 						</div>
-						<div className={styles.statistics_data}>
+						{activeSection === 'statistics' && (
+							<>
+								<p className={styles.statistics_text}>
+									Each page, each chapter is a new round of knowledge, a new step
+									towards understanding. By rewriting statistics, we create our
+									own reading history.
+								</p>
+							</>
+						)}
+						<div
+							className={clsx(
+								styles.statistics_data,
+								activeSection === 'diary' && styles.statistics_data_ext
+							)}
+						>
 							{activeSection === 'diary' ? (
 								<Diary
 									progress={book.progress}
@@ -255,16 +269,18 @@ function ReadingPage() {
 
 			{book && (
 				<li className={styles.read_book}>
-					<ul className={styles.read_book_title_container}>
-						<li>
-							<p className={styles.read_book_title}>My reading</p>
-						</li>
-						<li>
-							<p className={styles.read_book_time}>
-								{hours ? `${hours} hours and` : null} {minutes} minutes left
-							</p>
-						</li>
-					</ul>
+					{!statusReading && (
+						<ul className={styles.read_book_title_container}>
+							<li>
+								<p className={styles.read_book_title}>My reading</p>
+							</li>
+							<li>
+								<p className={styles.read_book_time}>
+									{hours ? `${hours} hours and` : null} {minutes} minutes left
+								</p>
+							</li>
+						</ul>
+					)}
 					<ul className={styles.book} key={book?._id}>
 						<li className={styles.book_img_box}>
 							{book.imageUrl ? (
