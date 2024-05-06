@@ -5,12 +5,6 @@
 	margin-bottom: 40px;
 }
 
-@media screen and (min-width: 768px) {
-	.container_logo {
-		margin-bottom: 157px;
-	}
-}
-
 .icon_logo {
 	width: 42px;
 	height: 17px;
@@ -25,12 +19,6 @@
 	color: var(--white-color);
 }
 
-@media screen and (max-width: 767px) {
-	.text_logo {
-		display: none;
-	}
-}
-
 .main_text {
 	margin-bottom: 20px;
 	font-weight: 700;
@@ -38,17 +26,6 @@
 	line-height: 100%;
 	letter-spacing: 0.02em;
 	color: var(--white-color);
-}
-
-@media screen and (min-width: 768px) {
-	.main_text {
-		width: 444px;
-		margin-bottom: 40px;
-		font-size: 64px;
-		line-height: 94%;
-		letter-spacing: 0.02em;
-		color: var(--white-color);
-	}
 }
 
 .main_text_ext {
@@ -60,13 +37,6 @@
 	flex-direction: column;
 	gap: 8px;
 	margin-bottom: 20px;
-}
-
-@media screen and (min-width: 768px) {
-	.field_container {
-		gap: 14px;
-		margin-bottom: 82px;
-	}
 }
 
 .field {
@@ -88,13 +58,6 @@
 	letter-spacing: -0.24px;
 }
 
-@media screen and (min-width: 768px) {
-	.field {
-		width: 472px;
-		height: 50px;
-	}
-}
-
 .field_input {
 	flex: 1;
 	height: 100%;
@@ -114,23 +77,9 @@
 	color: var(--white-color);
 }
 
-@media screen and (min-width: 768px) {
-	.field_input {
-		font-size: 14px;
-		line-height: 129%;
-	}
-}
-
 .empty_field {
 	width: 295px;
 	height: 44px;
-}
-
-@media screen and (min-width: 768px) {
-	.empty_field {
-		width: 472px;
-		height: 50px;
-	}
 }
 
 .action_container {
@@ -158,19 +107,6 @@
 
 .button_action_login {
 	padding: 12px 45px;
-}
-
-@media screen and (min-width: 768px) {
-	.button_action {
-		height: 52px;
-		padding: 16px 54px;
-		font-size: 20px;
-		line-height: 100%;
-	}
-
-	.button_action_login {
-		padding: 16px 54px;
-	}
 }
 
 .button_action:hover {
@@ -202,20 +138,6 @@
 	stroke: var(--white-color);
 }
 
-@media screen and (min-width: 768px) {
-	.button_hide_password {
-		top: 15px;
-		right: 18px;
-		width: 20px;
-		height: 20px;
-	}
-
-	.icon_button_hide_password {
-		width: 20px;
-		height: 20px;
-	}
-}
-
 .link_to_other_action {
 	display: block;
 	color: rgb(104, 104, 104);
@@ -224,13 +146,6 @@
 	line-height: 117%;
 	letter-spacing: -0.02em;
 	text-decoration: underline;
-}
-
-@media screen and (min-width: 768px) {
-	.link_to_other_action {
-		font-size: 14px;
-		line-height: 129%;
-	}
 }
 
 .link_to_other_action:hover {
@@ -286,7 +201,74 @@
 	height: 18px;
 }
 
+@media screen and (max-width: 767px) {
+	.text_logo {
+		display: none;
+	}
+}
+
 @media screen and (min-width: 768px) {
+	.main_text {
+		width: 444px;
+		margin-bottom: 40px;
+		font-size: 64px;
+		line-height: 94%;
+		letter-spacing: 0.02em;
+		color: var(--white-color);
+	}
+
+	.container_logo {
+		margin-bottom: 157px;
+	}
+
+	.field_container {
+		gap: 14px;
+		margin-bottom: 82px;
+	}
+
+	.field_input {
+		font-size: 14px;
+		line-height: 129%;
+	}
+
+	.field {
+		width: 472px;
+		height: 50px;
+	}
+
+	.empty_field {
+		width: 472px;
+		height: 50px;
+	}
+
+	.button_action {
+		height: 52px;
+		padding: 16px 54px;
+		font-size: 20px;
+		line-height: 100%;
+	}
+
+	.button_action_login {
+		padding: 16px 54px;
+	}
+
+	.link_to_other_action {
+		font-size: 14px;
+		line-height: 129%;
+	}
+
+	.button_hide_password {
+		top: 15px;
+		right: 18px;
+		width: 20px;
+		height: 20px;
+	}
+
+	.icon_button_hide_password {
+		width: 20px;
+		height: 20px;
+	}
+
 	.icon_status {
 		top: 15px;
 		right: 18px;

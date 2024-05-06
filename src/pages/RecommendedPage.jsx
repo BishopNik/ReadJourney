@@ -161,6 +161,17 @@ function RecommendedPage() {
 						</li>
 					</ul>
 				</div>
+				<ul className={styles.text_block}>
+					<li>
+						<p className={styles.text_block_icon}>📚</p>
+					</li>
+					<li>
+						<p className={styles.text_block_tx}>
+							"Books are <span className={styles.text_block_tx_ext}>windows</span> to
+							the world, and reading is a journey into the unknown."
+						</p>
+					</li>
+				</ul>
 			</Dashboard>
 			<li className={styles.recomm_book}>
 				{isLoading && <Loader />}
