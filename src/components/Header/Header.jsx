@@ -4,7 +4,6 @@ import { useEffect, useCallback, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
-import EllipsisText from 'react-ellipsis-text';
 import { logOut } from 'redux/auth/operations';
 import Icon from 'components/Icon';
 import styles from './header.module.css';
