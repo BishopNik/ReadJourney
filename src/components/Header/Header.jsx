@@ -4,6 +4,7 @@ import { useEffect, useCallback, useState } from 'react';
 import { Link, useLocation } from 'react-router-dom';
 import { useDispatch } from 'react-redux';
 import clsx from 'clsx';
+import EllipsisText from 'react-ellipsis-text';
 import { logOut } from 'redux/auth/operations';
 import Icon from 'components/Icon';
 import styles from './header.module.css';
@@ -95,7 +96,10 @@ const Header = () => {
 					</div>
 				</div>
 			)}
-			<Icon name={'logo'} className={styles.icon_logo} />
+			<div className={styles.container_logo}>
+				<Icon name={'logo'} className={styles.icon_logo} />
+				<h2 className={styles.text_logo}>read journey</h2>
+			</div>
 			<div className={styles.user_logo_mobile}>{user.name[0]}</div>
 			<button type='button' className={styles.burger_button} onClick={handleBurger}>
 				<Icon name={'menu'} className={styles.icon_menu} />
@@ -126,8 +130,16 @@ const Header = () => {
 					</Link>
 				</li>
 			</ul>
+
 			<div className={styles.container_user_logo_tablet}>
-				<div className={styles.user_logo_tablet}>{user.name[0]}</div>
+				<ul className={styles.user_info}>
+					<li>
+						<div className={styles.user_logo_tablet}>{user.name[0]}</div>
+					</li>
+					<li>
+						<p className={styles.user_name}>{user.name}</p>
+					</li>
+				</ul>
 				<button
 					type='button'
 					className={styles.button_logout_tablet}

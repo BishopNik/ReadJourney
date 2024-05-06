@@ -1,9 +1,18 @@
 /** @format */
 
+.container_logo {
+	display: flex;
+	gap: 4px;
+	margin-right: 180px;
+}
+
 .icon_logo {
 	width: 42px;
 	height: 17px;
-	margin-right: 180px;
+}
+
+.text_logo {
+	display: none;
 }
 
 .user_logo_mobile {
@@ -141,12 +150,16 @@
 	display: none;
 }
 
+.user_name {
+	display: none;
+}
+
 @media screen and (min-width: 768px) {
 	.menu_backdrop {
 		display: none;
 	}
 
-	.icon_logo {
+	.container_logo {
 		margin-right: 223px;
 	}
 
@@ -221,4 +234,41 @@
 }
 
 @media screen and (min-width: 1280px) {
+	.container_logo {
+		margin-right: 336px;
+	}
+
+	.text_logo {
+		display: block;
+		font-weight: 700;
+		font-size: 18px;
+		line-height: 100%;
+		letter-spacing: 0.02em;
+		text-transform: uppercase;
+		color: var(--white-color);
+	}
+
+	.link_container_tablet {
+		gap: 40px;
+		margin-right: 219px;
+	}
+
+	.user_info {
+		width: 168px;
+		display: flex;
+		justify-content: flex-start;
+		align-items: center;
+		gap: 8px;
+		overflow: hidden;
+	}
+
+	.user_name {
+		display: block;
+		font-weight: 700;
+		font-size: 16px;
+		line-height: 112%;
+		letter-spacing: -0.02em;
+		text-align: center;
+		color: var(--white-color);
+	}
 }
