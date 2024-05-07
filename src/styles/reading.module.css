@@ -563,6 +563,10 @@
 		margin: 0;
 	}
 
+	.progress_text {
+		margin-bottom: 60px;
+	}
+
 	.statistics_data {
 		width: 325px;
 		height: 281px;
@@ -601,5 +605,8 @@
 	.book_author_box {
 		height: 18px;
 		margin-bottom: 25px;
+	}
+	.book_title {
+		width: 767px;
 	}
 }
