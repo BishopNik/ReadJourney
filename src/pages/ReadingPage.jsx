@@ -30,6 +30,7 @@ function ReadingPage() {
 	const [page, setPage] = useState(0);
 	const [errorPageCount, setErrorPageCount] = useState(false);
 	const [statusReading, setStatusReading] = useState(false);
+	const [isTouch, setIsTouch] = useState(false);
 
 	const totalReadTime = book?.progress.reduce((totalReadTime, process) => {
 		if (process?.finishPage && process?.startPage) {
@@ -141,10 +142,11 @@ function ReadingPage() {
 						}}
 					>
 						<Form autoComplete='off'>
+							{console.log(isTouch)}
 							<label
 								className={clsx(
 									styles.field,
-									!isReadBook && isReadBook !== null
+									!isReadBook && isReadBook !== null && isTouch
 										? errorPageCount
 											? styles.field_error
 											: styles.field_success
@@ -159,15 +161,16 @@ function ReadingPage() {
 									type='number'
 									placeholder='0'
 									disabled={isReadBook}
+									onBlur={() => setIsTouch(true)}
 									onChange={({ target }) => {
 										validateField(target.value);
 										setPage(Number(target.value));
 									}}
 								/>
-								{!isReadBook && errorPageCount && (
+								{!isReadBook && errorPageCount && isTouch && (
 									<span className={styles.err_message}>{errorPageCount}</span>
 								)}
-								{!isReadBook && isReadBook !== null ? (
+								{!isReadBook && isReadBook !== null && isTouch ? (
 									errorPageCount ? (
 										<Icon name={'error'} className={styles.icon_status} />
 									) : (
