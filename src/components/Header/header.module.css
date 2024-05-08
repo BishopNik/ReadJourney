@@ -110,6 +110,11 @@
 	text-decoration: none;
 }
 
+.link_to_other_action:hover {
+	color: var(--white-color);
+	transition: color 250ms cubic-bezier(0.4, 0, 0.2, 1);
+}
+
 .link_to_ext {
 	color: var(--white-color);
 	border-bottom: 3px solid rgb(79, 146, 247);

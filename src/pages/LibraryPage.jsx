@@ -8,6 +8,7 @@ import clsx from 'clsx';
 import Icon from 'components/Icon';
 import styles from '../styles/library.module.css';
 import Dashboard from 'components/Dashboard';
+import Loader from 'components/Loader';
 import {
 	MainContext,
 	fetchRecommendedBooks,
@@ -20,6 +21,7 @@ import {
 function LibraryPage() {
 	const { setBook, setBookOwn, isOpenSuccessModal, setIsOpenSuccessModal } =
 		useContext(MainContext);
+	const [isLoading, setIsLoading] = useState(false);
 	const [isOpenSelect, setIsOpenSelect] = useState(false);
 	const [books, setBooks] = useState([]);
 	const [ownBooks, setOwnBooks] = useState([]);
@@ -72,17 +74,24 @@ function LibraryPage() {
 	};
 
 	const handleDelete = async id => {
+		setIsLoading(true);
 		await deleteBookFromLibrary(id);
 		const books = await fetchOwnBooks();
 		setOwnBooks(books);
+		setIsLoading(false);
 	};
 
 	useEffect(() => {
-		fetchRecommendedBooks(1, 3).then(data => {
-			data?.totalPages ? setPages(data.totalPages) : setPages(0);
-			setBooks(data?.results);
-		});
-		fetchOwnBooks().then(data => setOwnBooks(data));
+		setIsLoading(true);
+		fetchRecommendedBooks(1, 3)
+			.then(data => {
+				data?.totalPages ? setPages(data.totalPages) : setPages(0);
+				setBooks(data?.results);
+			})
+			.finally(() => setIsLoading(false));
+		fetchOwnBooks()
+			.then(data => setOwnBooks(data))
+			.finally(() => setIsLoading(false));
 	}, []);
 
 	useEffect(() => {
@@ -114,6 +123,7 @@ function LibraryPage() {
 
 	return (
 		<ul className={styles.main}>
+			{isLoading && <Loader />}
 			<Dashboard style={styles.dashboard_container}>
 				<div>
 					<p className={styles.title_dashboard}>Create your library:</p>
@@ -340,26 +350,26 @@ function LibraryPage() {
 					{ownBooks?.length ? (
 						filtredBooks?.length ? (
 							filtredBooks.map(({ _id, imageUrl, title, author, totalPages }) => (
-								<li
-									className={styles.my_library_book}
-									key={_id}
-									onClick={() =>
-										setBookOwn({ _id, imageUrl, title, author, totalPages })
-									}
-								>
-									{imageUrl ? (
-										<img
-											className={styles.my_library_book_img}
-											src={imageUrl}
-											alt='book'
-										/>
-									) : (
-										<p className={styles.my_library_book_img} />
-									)}
-									<p className={styles.my_library_book_title}>
-										<EllipsisText text={title} length={16} />
-									</p>
-									<p className={styles.my_library_book_author}>{author}</p>
+								<li className={styles.my_library_book} key={_id}>
+									<div
+										onClick={() =>
+											setBookOwn({ _id, imageUrl, title, author, totalPages })
+										}
+									>
+										{imageUrl ? (
+											<img
+												className={styles.my_library_book_img}
+												src={imageUrl}
+												alt='book'
+											/>
+										) : (
+											<p className={styles.my_library_book_img} />
+										)}
+										<p className={styles.my_library_book_title}>
+											<EllipsisText text={title} length={16} />
+										</p>
+										<p className={styles.my_library_book_author}>{author}</p>
+									</div>
 									<button
 										type='button'
 										className={styles.my_library_icon_trash}
@@ -371,7 +381,7 @@ function LibraryPage() {
 							))
 						) : (
 							<li className={styles.book_container_empty}>
-								<p className={styles.book_container_logo}>🆓</p>
+								<p className={styles.book_container_logo}>📂</p>
 							</li>
 						)
 					) : (

@@ -63,6 +63,7 @@ function RecommendedPage() {
 					<Formik
 						initialValues={{ title: '', author: '' }}
 						onSubmit={({ title, author }, { setSubmitting }) => {
+							setPage(1);
 							setTitle(title);
 							setAuthor(author);
 							setSubmitting(false);
@@ -70,6 +71,7 @@ function RecommendedPage() {
 						onReset={() => {
 							setTitle('');
 							setAuthor('');
+							setPage(1);
 						}}
 					>
 						{({ isSubmitting }) => (
@@ -220,31 +222,33 @@ function RecommendedPage() {
 					</ul>
 				</div>
 				<ul className={styles.book_container}>
-					{books?.length
-						? books.map(book => (
-								<li
-									className={styles.book}
-									key={book._id}
-									onClick={() => setBook(book)}
-								>
-									<img
-										className={styles.book_img}
-										src={book.imageUrl}
-										alt='book'
-									/>
-									<p className={styles.book_title}>
-										<EllipsisText text={book.title} length={19} />
-									</p>
-									<p className={styles.book_author}>{book.author}</p>
-								</li>
-						  ))
-						: Array.from({ length: 2 }, (_, i) => (
-								<li className={styles.book} key={i}>
-									<p className={styles.book_img} />
-									<p className={styles.book_title_ext} />
-									<p className={styles.book_author_ext} />
-								</li>
-						  ))}
+					{books?.length ? (
+						books.map(book => (
+							<li
+								className={styles.book}
+								key={book._id}
+								onClick={() => setBook(book)}
+							>
+								<img className={styles.book_img} src={book.imageUrl} alt='book' />
+								<p className={styles.book_title}>
+									<EllipsisText text={book.title} length={19} />
+								</p>
+								<p className={styles.book_author}>{book.author}</p>
+							</li>
+						))
+					) : title || author ? (
+						<li className={styles.book_container_empty}>
+							<p className={styles.book_container_logo}>📂</p>
+						</li>
+					) : (
+						Array.from({ length: setPerPage() }, (_, i) => (
+							<li className={styles.book} key={i}>
+								<p className={styles.book_img} />
+								<p className={styles.book_title_ext} />
+								<p className={styles.book_author_ext} />
+							</li>
+						))
+					)}
 				</ul>
 			</li>
 		</ul>

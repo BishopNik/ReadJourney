@@ -4,7 +4,7 @@ import React, { useContext, useEffect, useState, useCallback } from 'react';
 import { useParams } from 'react-router-dom';
 import { Form, Formik, Field } from 'formik';
 import clsx from 'clsx';
-import moment from 'moment';
+// import moment from 'moment';
 import Icon from 'components/Icon';
 import styles from '../styles/reading.module.css';
 import Dashboard from 'components/Dashboard';
@@ -32,36 +32,39 @@ function ReadingPage() {
 	const [statusReading, setStatusReading] = useState(false);
 	const [isTouch, setIsTouch] = useState(false);
 
-	const totalReadTime = book?.progress.reduce((totalReadTime, process) => {
-		if (process?.finishPage && process?.startPage) {
-			const timeRead = moment(process.finishReading).diff(process.startReading, 'seconds');
-			totalReadTime += timeRead;
-			return totalReadTime;
-		}
-		return totalReadTime;
-	}, 0);
-	const duration = moment.duration(totalReadTime, 'seconds');
-	const hours = duration.hours();
-	const minutes = duration.minutes();
+	// const totalReadTime = book?.progress.reduce((totalReadTime, process) => {
+	// 	if (process?.finishPage && process?.startPage) {
+	// 		const timeRead = moment(process.finishReading).diff(process.startReading, 'seconds');
+	// 		totalReadTime += timeRead;
+	// 		return totalReadTime;
+	// 	}
+	// 	return totalReadTime;
+	// }, 0);
+	// const duration = moment.duration(totalReadTime, 'seconds');
+	// const hours = duration.hours();
+	// const minutes = duration.minutes();
 
 	const actionReadBook = () => {
 		setIsSubmitting(true);
 		if (!statusReading) {
-			startReadingBook(book._id, page).then(data => {
-				if (data) {
-					setBook(data);
-					setStatusReading(!statusReading);
-					setIsSubmitting(false);
-				}
-			});
+			startReadingBook(book._id, page)
+				.then(data => {
+					if (data) {
+						setBook(data);
+						setStatusReading(!statusReading);
+						setIsSubmitting(false);
+					}
+				})
+				.finally(() => setIsSubmitting(false));
 		} else {
-			stopReadingBook(book._id, page).then(data => {
-				if (data) {
-					setBook(data);
-					setStatusReading(!statusReading);
-					setIsSubmitting(false);
-				}
-			});
+			stopReadingBook(book._id, page)
+				.then(data => {
+					if (data) {
+						setBook(data);
+						setStatusReading(!statusReading);
+					}
+				})
+				.finally(() => setIsSubmitting(false));
 		}
 	};
 
@@ -142,7 +145,6 @@ function ReadingPage() {
 						}}
 					>
 						<Form autoComplete='off'>
-							{console.log(isTouch)}
 							<label
 								className={clsx(
 									styles.field,
@@ -272,18 +274,23 @@ function ReadingPage() {
 
 			{book && (
 				<li className={styles.read_book}>
-					{!statusReading && (
-						<ul className={styles.read_book_title_container}>
-							<li>
-								<p className={styles.read_book_title}>My reading</p>
-							</li>
+					<ul className={styles.read_book_title_container}>
+						<li>
+							<p className={styles.read_book_title}>My reading</p>
+						</li>
+						{!statusReading && (
 							<li>
 								<p className={styles.read_book_time}>
-									{hours ? `${hours} hours and` : null} {minutes} minutes left
+									{book?.timeLeftToRead?.hours
+										? `${book.timeLeftToRead.hours} hours and`
+										: null}{' '}
+									{book.timeLeftToRead?.minutes
+										? `${book.timeLeftToRead?.minutes} minutes left`
+										: null}
 								</p>
 							</li>
-						</ul>
-					)}
+						)}
+					</ul>
 					<ul className={styles.book} key={book?._id}>
 						<li className={styles.book_img_box}>
 							{book.imageUrl ? (
